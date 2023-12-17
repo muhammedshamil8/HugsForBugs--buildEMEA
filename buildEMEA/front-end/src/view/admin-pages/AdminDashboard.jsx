@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 function AdminDashboard() {
   const navigate = useNavigate()
   return (
-    <div>AdminDashboard<br />
+    <div>AdminDashboard hyy<br />
       <Link to="/adminProfile">click here to go adminProfile</Link>
     </div>
   )
