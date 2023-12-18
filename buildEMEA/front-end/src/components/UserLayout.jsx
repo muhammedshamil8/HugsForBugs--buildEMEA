@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom';
 
 function UserLayout() {
   return (
@@ -13,7 +14,7 @@ function UserLayout() {
         </ul>
       </nav>
 
-      <header className="p-6 bg-red-800 text-center">
+      <header className="p-6 bg-green-800 text-center">
         <h1 className="text-3xl font-bold">Welcome to the Website</h1>
       </header>
 
