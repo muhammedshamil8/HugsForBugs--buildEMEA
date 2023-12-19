@@ -2,21 +2,24 @@
 
 <!-- ![Banner](./assets/banner.gif)  -->
 # Project Name
-Selected project 
+Selected project : IQAC
 
 **Description**:
 
-Short description about the project
+IQAC Report Submission Portal: A web application where users can upload the annual report to IQAC. Users should be able to submit all the data for the IQAC as given in the templates.
 
 ## Team Name
-Team name here
+HugsForBugs
 
 ## Team Members
-1. Name [Embed personal GitHub URL]
-2. Name [Embed personal GitHub URL]
+1. Muhammed Shamil [View Profile](https://github.com/muhammedshamil8)
+2. Muhammed Saleel [View Profile](https://github.com/Saleel10)
+3. Dayyan Ali [View Profile](https://github.com/Dayyan404)
+4. Shifna Shirin [View Profile](https://github.com/shifnashirin)
+5. Sibna Sherin [View Profile](https://github.com/Sibna-sherin)
 
 ## Link to Product Walkthrough
-[Link to video]
+[Link to video] comming soon!
 
 ## How it Works ?
 1. Explain the working of the project
