@@ -14,7 +14,7 @@ function AdminLayout() {
         </ul>
       </nav>
 
-      <header className="p-6 bg-red-800 text-center">
+      <header className="p-8 bg-red-800 text-center">
         <h1 className="text-3xl font-bold">Welcome to the Admin Panel</h1>
       </header>
 

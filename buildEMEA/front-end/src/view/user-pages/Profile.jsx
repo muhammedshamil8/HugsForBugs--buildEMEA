@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Profile() {
   return (
-    <div>Profile</div>
+    <div>Profile </div>
   )
 }
 

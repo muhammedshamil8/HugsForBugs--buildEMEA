@@ -1,0 +1,8 @@
+.side-bar{
+  background-color: green;
+  width: 100px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 8;
+}
