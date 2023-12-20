@@ -12,7 +12,7 @@ For Front-end ;-
 
  1. Go to the front-end directory [  `cd front-end`  ]
 
- 2. Run `npm install` in the root directory to install all dependencies 
+ 2. Run `npm install --force` in the root directory to install all dependencies (force command bcz exel format have trouble to install)
 
  3. Run `npm run dev` to start the server
 
