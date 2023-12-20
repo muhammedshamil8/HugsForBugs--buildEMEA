@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
         <div>
-      <h1 className='text-customBlue'>Hello World</h1>
+      <h1 className='text-customBlue flex align-center'>Hello World</h1>
      </div>
     </div>
   )
