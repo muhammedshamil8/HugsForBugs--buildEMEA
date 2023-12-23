@@ -2,9 +2,9 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 function AdminLayout() {
-  if (!token) {
-    return <Navigate to="/login"/>
-  }
+  // if (!token) {
+  //   return <Navigate to="/login"/>
+  // }
   return (
     <div className="bg-gray-800 text-white">
       <nav className="flex items-center justify-between p-4">

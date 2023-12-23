@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeImg from '../images/home.svg';
 import Logo from '../assets/IqacLogo.svg';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  useEffect(() => {
+    // Add the 'active' class after a short delay to trigger the fade-in effect
+    const timeoutId = setTimeout(() => {
+      setShowOverlay(true);
+    }, 1000); // Adjust the delay as needed
+
+    // Clear the timeout when the component is unmounted
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+
   return (
     <div className="relative h-screen">
       {/* Background Image */}
       <img src={HomeImg} alt="Home" className="absolute inset-0 w-full h-full object-cover z-[-1]" />
 
+      {/* fade loading Effect */}
+      <div className='overlay'>
+      </div>
+      
       {/* Logo */}
       <Link to='/' className="absolute top-0 left-16">
         <img src={Logo} alt="Logo" />
