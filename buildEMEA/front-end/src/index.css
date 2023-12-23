@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 640px) {
+    body{
+        background-color: #f7fafc;
+        display: none;
+    }
+}
+    

@@ -7,7 +7,7 @@ function Login() {
   return (
     <div>Login
 
-        <Input type="text" placeholder="Username" />
+        {/* <Input type="text" placeholder="Username" /> */}
     </div>
   )
 }

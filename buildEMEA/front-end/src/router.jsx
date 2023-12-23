@@ -7,7 +7,7 @@ import AdminLogin from "./view/admin-pages/AdminLogin";
 import AdminProfile from "./view/admin-pages/AdminProfile";
 import Dashboard from "./view/user-pages/Dashboard";
 import Login from "./view/user-pages/Login";
-import Home from "./view/user-pages/Home";
+import Home from "./view/Home";
 import Profile from "./view/user-pages/Profile";
 import NotFound from "./view/NotFound";
 const router = createBrowserRouter([
@@ -55,6 +55,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <AuthLayout />,
         children: [
+            
             {
                 path: "/login",
                 element: <Login />
