@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet ,Link} from 'react-router-dom';
-import Logo from '../../../assets/IqacLogo.svg';
+import Logo from '../../../assets/Logo.svg';
 import BGIMAGE from '../../../images/User-bg/User-buildEMEA.jpg';
 
 function AuthLayout() {
