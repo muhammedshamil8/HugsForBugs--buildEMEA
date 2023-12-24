@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import HomeImg from '../images/home.svg';
-import Logo from '../assets/IqacLogo.svg';
+import HomeImg from '../../assets/home.svg';
+import Logo from '../../assets/IqacLogo.svg';
 import { Link } from 'react-router-dom';
 
 function Home() {

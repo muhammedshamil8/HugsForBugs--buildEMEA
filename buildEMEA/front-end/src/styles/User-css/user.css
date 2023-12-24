@@ -1,0 +1,20 @@
+.side-bar{
+  background-color: green;
+  width: 100px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 8;
+}
+nav li{
+  list-style-type: none;
+  padding: 8px 0;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.233);
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}

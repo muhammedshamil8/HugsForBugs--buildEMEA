@@ -1,15 +1,15 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import UserLayout from "./components/UserLayout";
-import AdminLayout from "./components/AdminLayout";
-import AuthLayout from "./components/AuthLayout";
-import AdminDashboard from "./view/admin-pages/AdminDashboard";
-import AdminLogin from "./view/admin-pages/AdminLogin";
-import AdminProfile from "./view/admin-pages/AdminProfile";
-import Dashboard from "./view/user-pages/Dashboard";
-import Login from "./view/user-pages/Login";
-import Home from "./view/Home";
-import Profile from "./view/user-pages/Profile";
-import NotFound from "./view/NotFound";
+import UserLayout from "./components/Layouts/User/UserLayout";
+import AdminLayout from "./components/Layouts/Adminn/AdminLayout";
+import AuthLayout from "./components/Layouts/Authenticationn/AuthLayout";
+import AdminDashboard from "./view/admin-pages/Dashboard/AdminDashboard";
+import AdminLogin from "./view/admin-pages/Login/AdminLogin";
+import AdminProfile from "./view/admin-pages/Profile/AdminProfile";
+import Dashboard from "./view/user-pages/Dashboard/Dashboard";
+import Login from "./view/user-pages/Login/Login";
+import Home from "./view/Home-page/Home";
+import Profile from "./view/user-pages/Profile/Profile";
+import NotFound from "./view/NotFound-page/NotFound";
 const router = createBrowserRouter([
     {
         path: "/",

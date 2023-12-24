@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Outlet, Navigate } from 'react-router-dom';
-import '../styles/user.css';
-import '../styles/general.css';
-import BGIMAGE from '../images/iqac-userBG.jpg';
-import Logo from '../assets/IqacLogo.svg';
+import '../../../styles/User-css/user.css';
+import '../../../styles/general-css/general.css';
+import BGIMAGE from '../../../images/User-bg/iqac-userBG.jpg';
+import Logo from '../../../assets/IqacLogo.svg';
 
 function UserLayout() {
   const token = localStorage.getItem('token');
@@ -34,7 +34,7 @@ function UserLayout() {
         h-20
       bg-white/10
         w-full 
-        ml-32 
+        ml-44
         backdrop-blur-md 
         header'>
 
@@ -52,28 +52,44 @@ function UserLayout() {
       fixed 
       left-0 
       top-0 
-      w-32 
+      w-44
       h-full
     bg-white/10
     border-r-white 
       backdrop-blur-md 
+      flex
+      flex-col
+      justify-between
+      items-center
       sidebar'>
 
-        <div 
-        className='
+        <div
+          className='
+          h-20
         '>
           <Link to='/'>
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" className='
+            h-full
+            mt-1'/>
           </Link>
         </div>
 
-        <nav 
-        className='
-        flex
-        flex-col
-        p-2
+        <nav
+          className='
+        flex-1
+        w-full
+        p-3
         '>
-          <ul>
+          <ul className='
+                flex
+                flex-col
+                mt-10
+                gap-4
+                items-center
+                text-white
+       
+
+          '>
             <li>Dashboard</li>
             <li>Dashboard</li>
             <li>Dashboard</li>
@@ -81,8 +97,17 @@ function UserLayout() {
           </ul>
         </nav>
 
-        <footer 
-        className='
+        <footer
+          className='
+          bg-black/10
+          w-full
+          h-16
+          p-2
+          flex
+          justify-center
+          items-center
+          rounded-t-[20px]
+          text-white
         '>
           <p>FAQ</p>
         </footer>
@@ -92,7 +117,7 @@ function UserLayout() {
       <main
         className="
         p-8 
-        ml-32
+        ml-44
         mt-20
       text-black ">
 

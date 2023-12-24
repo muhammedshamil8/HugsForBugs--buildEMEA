@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Input from '../../tool-components/Input'
+import Input from '../../../components/Input/Input'
 
 function AdminLogin() {
   return (
