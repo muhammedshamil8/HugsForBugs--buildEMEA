@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>Dashboard
+
+
+
+      heklosckndfk
+    </div>
   )
 }
 
