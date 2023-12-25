@@ -5,12 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\StoreDataRequest;
 use App\Http\Resources\UserResource;
-use App\Http\Resources\DataResource;
 use App\Models\User;
-use App\Models\Data;
-
 
 class UserController extends Controller
 {
@@ -21,7 +17,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        
         return UserResource::collection(User::query()->orderBy('id', 'desc')->paginate(10));
     }
 
@@ -81,37 +76,4 @@ class UserController extends Controller
 
         return response("", 204);
     }
-
-    public function getData()   
-    {   
-        $user = auth()->user();
-        
-        return DataResource::collection(Data::with('user')->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10));
-    }   
-    public function storeData(StoreDataRequest $request)
-    {
-        // Validated data is available via $request->validated()
-        $data = $request->validated();
-    
-        try {
-            // Additional logic to store the data
-            $data['user_id'] = auth()->id();
-            $createdData = Data::create($data);
-    
-            // Return a successful response
-            return response(new DataResource($createdData), 201);
-        } catch (\Exception $e) {
-            // Log the exception for further investigation
-            \Log::error($e);
-    
-            // Return an error response
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
-    }
-    public function userID()
-    {
-        $user = auth()->user();
-        return response()->json(['user_id' => $user->id], 200);
-    }
-    
 }
