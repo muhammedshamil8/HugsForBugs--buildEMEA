@@ -1,0 +1,37 @@
+.head{
+    color:rgb(255, 255, 255);
+    text-align: left;
+    font-size: xxx-large;
+    font-family: 'Poppins', sans-serif;
+    
+
+}
+
+.caption{
+    color:rgb(255, 255, 255);
+    text-align:left;
+    font-size:small;
+    font-family:monospace;
+  
+  
+    
+
+}
+
+.box{
+    width: 465px;
+    height: 465px;
+    background-color: #ffffff16;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.607);
+    position: absolute;
+  top: 150px;
+  left: 770px;
+  
+}
+.form{
+    padding: 4%;
+    text-align: center;
+}
