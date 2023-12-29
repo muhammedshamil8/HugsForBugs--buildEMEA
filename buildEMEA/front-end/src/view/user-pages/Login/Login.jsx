@@ -2,7 +2,6 @@ import { Input } from 'postcss'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
 import '../../../styles/User-css/login.css';
 
 
@@ -14,12 +13,24 @@ function Login() {
       <h1 className='head'>SIGN IN</h1>
       <h6 className='caption' >Log in with your credentials</h6>
 
-      <form className='form'>
-        <label htmlFor="username">Username</label>
-        <input type="text" id="username" /><br></br>
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" /><br></br>
-        <button type="submit">Sign In</button>
+      <form className='signin-form'>
+        <div className='form-group'><label htmlFor="username">Username</label>
+        <input type="text" id="username" /></div><br></br>
+
+        <div className='form-group'><label htmlFor="category">category</label><select name="dropdown">
+  <option value="option1">Option 1</option>
+  <option value="option2">Option 2</option>
+  <option value="option3">Option 3</option>
+  
+</select>
+        <input type="" id="category" />
+        
+</div><br></br>
+
+        <div className='form-group'><label htmlFor="password">Password</label>
+        <input type="password" id="password" /></div><br></br>
+
+        <div className='form-group'><button type="submit">Sign In</button></div>
       </form>
 
 
