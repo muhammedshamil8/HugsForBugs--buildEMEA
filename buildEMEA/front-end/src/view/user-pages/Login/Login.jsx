@@ -17,13 +17,14 @@ function Login() {
         <div className='form-group'><label htmlFor="username">Username</label>
         <input type="text" id="username" /></div><br></br>
 
-        <div className='form-group'><label htmlFor="category">category</label><select name="dropdown">
-  <option value="option1">Option 1</option>
-  <option value="option2">Option 2</option>
-  <option value="option3">Option 3</option>
+        <div className='form-group'><label htmlFor="category">category</label>
+      <select className='dropdown' name="dropdown">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
   
-</select>
-        <input type="" id="category" />
+      </select>
+       
         
 </div><br></br>
 
