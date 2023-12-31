@@ -10,6 +10,7 @@ import Login from "./view/user-pages/Login/Login";
 import Home from "./view/Home-page/Home";
 import Profile from "./view/user-pages/Profile/Profile";
 import NotFound from "./view/NotFound-page/NotFound";
+import AdminAuthLayout from "./components/Layouts/Authenticationn/AdminAuthLayout";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/adminDashboard",
-                element: <AdminDashboard /> 
+                element: <AdminDashboard />
             },
             {
                 path: "/adminProfile",
@@ -55,22 +56,29 @@ const router = createBrowserRouter([
         path: "/",
         element: <AuthLayout />,
         children: [
-            
+
             {
                 path: "/login",
                 element: <Login />
             },
+        ]
+    },
+    {
+        path: "/",
+        element: <AdminAuthLayout />,
+        children: [
+
             {
                 path: "/adminLogin",
                 element: <AdminLogin />
             },
-           
+
         ]
     },
     {
         path: "*",
-        element: <NotFound/>
-      }
+        element: <NotFound />
+    }
 ])
 
 export default router;
