@@ -1,5 +1,10 @@
-## backend
+# Team HugsForBugs
 
+
+How to run Back-end
+- stack used : Laravel , MySql
+- Clone the repo
+- Get into the root directory [  cd buildEMEA/back-end  ]
 
 ## Installation 
 Make sure you have environment setup properly. You will need PHP8.1, composer and Node.js.
@@ -10,5 +15,4 @@ Make sure you have environment setup properly. You will need PHP8.1, composer an
 4. Run `composer install`
 5. Set the encryption key by executing `php artisan key:generate --ansi`
 6. Run migrations `php artisan migrate --seed`
-7. Start local server by executing `php artisan serve`
-
+7. Start local server by executing `php artisan serve --port=9000`

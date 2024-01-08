@@ -24,7 +24,12 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('main')->plainTextToken;
-        return response(compact('user', 'token'));
+            // Customize response for user login
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+                'message' => 'User Created  successfully',
+            ]);
     }
 
     public function login(LoginRequest $request)
