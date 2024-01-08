@@ -1,5 +1,7 @@
-import React from 'react';
-import { NavLink, Link, Outlet, Navigate } from 'react-router-dom';
+import { React ,useEffect} from 'react';
+import { NavLink, Link, Outlet, useNavigate , Navigate  } from 'react-router-dom';
+import { useStateContext } from "../../../context/ContextProvider";
+import axiosClient from "../../../axios-client.js";
 
 // icons importing and images
 import AddReportIcon from '../../../assets/icons/addreport.svg';
@@ -12,13 +14,46 @@ import '../../../styles/general-css/general.css';
 import BGIMAGE from '../../../images/Admin-bg/admin-buildEMEA.png';
 import Logo from '../../../assets/Logo.svg';
 import Avatar from '../../../assets/avatar.svg';
+import {LoginOutlined}  from '@ant-design/icons';
 
 function AdminLayout() {
-  const token = localStorage.getItem('token');
+  const { user, token, setUser, setToken, notification, role  , setRole} = useStateContext();
+  const navigate = useNavigate();
+  if (!token) {
+    return <Navigate to="/adminlogin"/>
+  }else if (role !== 'admin') {
+    return <Navigate to="/dashboard"/>
+  }
 
-  // if (!token) {
-  //   return <Navigate to="/login"/>
-  // }
+  // unauth
+
+  const onLogout = ev => {
+    ev.preventDefault()
+
+    axiosClient.post('/logout')
+      .then(() => {
+        setUser({})
+        setToken(null)
+      })
+      
+      navigate('/adminlogin')
+  }
+
+  useEffect(() => {
+    axiosClient.get('/user')
+      .then(({data}) => {
+         setUser(data)
+      })
+      if (user){
+        if (role === 'admin') {
+         if (user.role === 'user') {
+          setRole(null);
+          setToken(null);
+          navigate('/403');
+         }
+        }
+      }
+  }, [user, role , setUser , setToken , setRole])
 
 
   return (
@@ -51,7 +86,7 @@ function AdminLayout() {
         <div className='flex items-center mr-44 p-10 h-full'>
           {/* username */}
           <div>
-            <p className='mr-4 text-white'>Saleel@123</p>
+            <p className='mr-4 text-white'>{user.name}</p>
           </div>
 
           {/* Avatar */}
@@ -112,6 +147,7 @@ function AdminLayout() {
             <NavLink to='/addreport' className='hover:text-gray-300' activeClassName='active-link'><img src={AddReportIcon} className='icon' />Add report</NavLink>
             <NavLink to='/adminprofile' className='hover:text-gray-300' activeClassName='active-link'><img src={ProfileIcon} className='icon' />Profile</NavLink>
             <NavLink to='/contact' className='hover:text-gray-300' activeClassName='active-link'><img src={ContactIcon} className='icon' />Contact</NavLink>
+            <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
           </ul>
         </nav>
 
@@ -119,9 +155,11 @@ function AdminLayout() {
       </aside>
 
       {/* child pages */}
+      
       <main
         className="
-        p-8 
+        px-8
+        pt-4
         ml-44
         mt-20
       text-black ">

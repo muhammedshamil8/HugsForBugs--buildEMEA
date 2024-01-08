@@ -1,9 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate , Navigate } from 'react-router-dom';
+import { useStateContext } from "../../../context/ContextProvider";
 import { Outlet ,Link} from 'react-router-dom';
 import Logo from '../../../assets/Logo.svg';
 import BGIMAGE from '../../../images/User-bg/User-buildEMEA.jpg';
 
 function AuthLayout() {
+  const { user, token , role} = useStateContext();
+  const navigate = useNavigate();
+
+  if (token) {
+    if (role === "user") {
+     return <Navigate to='/dashboard' />;
+    } else if (role === "admin") {
+      return <Navigate to='/admindashboard' />;
+    }
+    }
+
+
   return (
     <div className=''>
       {/* Logo */}

@@ -1,7 +1,9 @@
 // AdminLogin.jsx
 
-import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link , useNavigate} from "react-router-dom";
+import axiosClient from "../../../axios-client.js";
+import {createRef,useState , React} from "react";
+import {useStateContext} from "../../../context/ContextProvider";
 import { Button, Input, Form, Divider, notification, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../../../styles/admin-css/adminSignin.css'; // Import your 
@@ -15,6 +17,8 @@ import {
 } from '@ant-design/icons';
 
 const AdminLogin = () => {
+  const { setUser, setToken , setRole , token , role } = useStateContext()
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (placement) => {
@@ -27,9 +31,27 @@ const AdminLogin = () => {
   };
 
   const onFinish = (values) => {
-    console.log('Received values:', values);
+    // console.log('Received values:', values);
     if (values) {
-     navigate('/admindashboard');
+      const paylod = {
+        email : values.email,
+        password: values.password,
+      }
+      axiosClient.post('/admin/login', paylod)
+      .then(({data}) => {
+        setUser(data.admin);
+        console.log(data.message);
+        // localStorage.setItem('role', data.admin.role);
+        setRole(data.admin.role);
+        setToken(data.token);
+        navigate('/admindashboard');
+      })
+      .catch((err) => {
+        const response = err.response;
+        if (response && response.status === 422) {
+          setMessage(response.data.message)
+        }
+      })
     }
   };
 
@@ -54,14 +76,20 @@ const AdminLogin = () => {
           <div className='auth-continer'>
 
             <Form name="adminLogin" onFinish={onFinish}>
+            {message &&
+            <div className="alert">
+              <p>{message}</p>
+             
+            </div>
+          }
               <Form.Item
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                name="email"
+                rules={[{ required: true, message: 'Please input your email!' }]}
               >
                 <Input
                   className='admin-login-input'
                   prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Username"
+                  placeholder="Email"
                 />
               </Form.Item>
               <Form.Item
