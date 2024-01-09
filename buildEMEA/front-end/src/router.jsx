@@ -17,6 +17,7 @@ import ReportTable from "./view/user-pages/AddReport/Report-Table";
 import Users from "./view/admin-pages/User/Users";
 import UserForm from './view/admin-pages/User/UserForm';
 import Category from "./view/admin-pages/Category/Category";
+import Contact from "./view/user-pages/Contact/Contact";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/contact",
+                element: <Contact />
             },
             {
                 path: "/addreport",

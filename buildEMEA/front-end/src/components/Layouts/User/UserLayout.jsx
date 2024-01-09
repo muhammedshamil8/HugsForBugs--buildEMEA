@@ -21,11 +21,11 @@ function UserLayout() {
   const { user, token, setUser, setToken, notification, role, setRole } = useStateContext();
   const navigate = useNavigate();
 
-  if (!token) {
-    return <Navigate to="/login" />
-  } else if (role !== 'user') {
-    return <Navigate to="/login" />
-  }
+  // if (!token) {
+  //   return <Navigate to="/login" />
+  // } else if (role !== 'user') {
+  //   return <Navigate to="/login" />
+  // }
 
   // unauth
 
@@ -61,9 +61,9 @@ function UserLayout() {
 
 
   return (
-    <div>
+    <div className='body'>
       {/* background image */}
-      <img src={BGIMAGE}
+      {/* <img src={BGIMAGE}
         className='
         absolute 
         inset-0 
@@ -71,7 +71,7 @@ function UserLayout() {
         h-full 
         object-cover 
         z-[-1]   
-        background' />
+        background' /> */}
 
       {/* header */}
       <header className='

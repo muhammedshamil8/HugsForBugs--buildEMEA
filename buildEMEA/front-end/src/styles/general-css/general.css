@@ -12,3 +12,24 @@
   /* .background{
     filter: blur(5px);
   } */
+  .background{
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+
+
+  }
+  .body{
+    background-color: red;
+    background-image: url('../../images/User-bg/User-buildEMEA.jpg');
+    background-size: cover;
+background-repeat: no-repeat;
+background-position: 100% 100%;
+position: absolute;
+width: 100%;
+height: 100vh;
+margin: 0;
+overflow-x: hidden;
+overflow-y: scroll;
+  }
