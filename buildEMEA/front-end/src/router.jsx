@@ -14,6 +14,9 @@ import AdminAuthLayout from "./components/Layouts/Authenticationn/AdminAuthLayou
 import UnAuth from "./view/NotFound-page/UnAuth-403";
 import AddReport from "./view/user-pages/AddReport/Add-Report";
 import ReportTable from "./view/user-pages/AddReport/Report-Table";
+import Users from "./view/admin-pages/User/Users";
+import UserForm from './view/admin-pages/User/UserForm';
+import Category from "./view/admin-pages/Category/Category";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
                 element: <AddReport />
             },
             {
-               path: "/addreport/:id",
+                path: "/addreport/:id",
                 element: <ReportTable />
             },
         ]
@@ -61,6 +64,23 @@ const router = createBrowserRouter([
                 path: "/adminProfile",
                 element: <AdminProfile />
             },
+            {
+                path: '/users',
+                element: <Users />
+            },
+            {
+                path: '/users/new',
+                element: <UserForm key="userCreate" />
+            },
+            {
+                path: '/users/:id',
+                element: <UserForm key="userUpdate" />
+            },
+            {
+                path: '/category',
+                element: <Category />
+            }
+
         ]
     },
     {
