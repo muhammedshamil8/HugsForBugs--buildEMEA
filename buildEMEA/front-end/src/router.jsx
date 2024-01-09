@@ -9,7 +9,11 @@ import Dashboard from "./view/user-pages/Dashboard/Dashboard";
 import Login from "./view/user-pages/Login/Login";
 import Home from "./view/Home-page/Home";
 import Profile from "./view/user-pages/Profile/Profile";
-import NotFound from "./view/NotFound-page/NotFound";
+import NotFound from "./view/NotFound-page/NotFound-404";
+import AdminAuthLayout from "./components/Layouts/Authenticationn/AdminAuthLayout";
+import UnAuth from "./view/NotFound-page/UnAuth-403";
+import AddReport from "./view/user-pages/AddReport/Add-Report";
+import ReportTable from "./view/user-pages/AddReport/Report-Table";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +35,14 @@ const router = createBrowserRouter([
                 path: "/profile",
                 element: <Profile />
             },
+            {
+                path: "/addreport",
+                element: <AddReport />
+            },
+            {
+               path: "/addreport/:id",
+                element: <ReportTable />
+            },
         ]
     },
     {
@@ -43,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/adminDashboard",
-                element: <AdminDashboard /> 
+                element: <AdminDashboard />
             },
             {
                 path: "/adminProfile",
@@ -55,22 +67,33 @@ const router = createBrowserRouter([
         path: "/",
         element: <AuthLayout />,
         children: [
-            
+
             {
                 path: "/login",
                 element: <Login />
             },
+        ]
+    },
+    {
+        path: "/",
+        element: <AdminAuthLayout />,
+        children: [
+
             {
                 path: "/adminLogin",
                 element: <AdminLogin />
             },
-           
+
         ]
     },
     {
+        path: "/403",
+        element: <UnAuth />
+    },
+    {
         path: "*",
-        element: <NotFound/>
-      }
+        element: <NotFound />
+    }
 ])
 
 export default router;

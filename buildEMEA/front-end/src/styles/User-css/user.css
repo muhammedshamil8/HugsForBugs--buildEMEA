@@ -22,7 +22,7 @@ nav a:hover{
 }
 nav .active {
   background-color: rgba(0, 0, 0, 0.233) !important;
-
+  color: rgb(209 213 219);
 }
 .icon{
   font-size: 20px;

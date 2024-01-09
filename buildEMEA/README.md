@@ -11,7 +11,7 @@ For Front-end ;-
 - stack used : React , tailwindcss 
 
  1. Go to the front-end directory [  `cd front-end`  ]
-
+ -  Copy `react/.env.example` into `.env` and adjust the `VITE_API_BASE_URL` parameter to point to the backend API
  2. Run `npm install` in the root directory to install all dependencies 
 
  3. Run `npm run dev` to start the server

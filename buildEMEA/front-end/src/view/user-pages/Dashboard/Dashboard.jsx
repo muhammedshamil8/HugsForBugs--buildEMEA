@@ -6,6 +6,7 @@ import image1 from '../../../images/User-bg/WhatsApp Image 2023-12-11 at 21.00.1
 
 function Dashboard() {
   return (
+
     <div>
     <h1 className='H1'>IQAC</h1>
     <h2>(Internal Quality Assurance Cell)</h2>
@@ -19,6 +20,7 @@ function Dashboard() {
     <h3 className='H3'>Shamil</h3>
     <h4 className='H4'>Assistant professor,
     Department of CS</h4>
+
     </div>
   )
 }

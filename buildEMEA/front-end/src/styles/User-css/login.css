@@ -1,0 +1,58 @@
+.box{
+    width: 465px;
+    height: 465px;
+    background-color: #ffffff16;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.607);
+    position: absolute;
+  top: 150px;
+  left: 770px;
+  
+}
+
+.signin-form {
+    /* Example styles for the entire form */
+    width: 300px;
+    margin: 0 auto;
+    /* Add padding or margin to create space around the form */
+    padding: 15px;
+    position: absolute;
+    
+    
+  }
+  
+  .form-group {
+    margin-bottom: 0.010%; /* Adds space between each form group */
+  }
+  
+  label {
+    display: block; /* Puts each label on a new line */
+    margin-bottom: 0.000001px; /* Space below each label */
+    
+    
+  }
+  
+  input,
+  button {
+    width: 100%; /* Makes inputs and button full width */
+    padding: 1px; /* Adjust padding for better appearance */
+    margin-bottom: 1px; /* Space below inputs and button */
+    background-color: rgba(140, 0, 255, 0.444);
+  }
+
+  .dropdown{
+    width: 100%; /* Makes inputs and button full width */
+    padding: 1px; /* Adjust padding for better appearance */
+    margin-bottom: 1px; /* Space below inputs and button */
+    background-color: rgba(140, 0, 255, 0.444);
+  
+  }
+  
+.head{
+    color:rgb(255, 255, 255);
+    text-align: left;
+    font-size: xxx-large;
+    font-family: 'Poppins', sans-serif;
+}

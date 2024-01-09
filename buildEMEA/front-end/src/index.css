@@ -11,7 +11,7 @@
     bottom: 0;
     right: 0;
     z-index: -10;
-    animation: fade-in 3s ease-in-out;
+    animation: fade-in 2.2s ease-in-out;
   }
   
   @keyframes fade-in {
