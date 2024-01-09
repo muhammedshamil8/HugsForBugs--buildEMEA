@@ -30,8 +30,8 @@ h2
     color: white;
     text-align: left;
     padding-left: 3%;
-    margin-top: 60px;
-    margin-left: -100px;
+    margin-top: 110px;
+    margin-left:0px;
 
     
 }
@@ -52,21 +52,21 @@ h2
 .H3
 {
     color:rgb(0, 0, 0);
-    text-align: center;
+    text-align: left;
     font-size: xx-large;
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
-    margin-top: -180px;
-    margin-left: -300px;    
+    margin-top: -130px;
+    margin-left: 400px;    
 }
 .H4
 {
     color:rgb(0, 0, 0);
     text-align: left;
-    font-size: xx-large;
+    font-size: large;
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
-    margin-top: 240px;
-    margin-left: 90px;    
+    margin-top:  0px;
+    margin-left: 400px;    
 }
 

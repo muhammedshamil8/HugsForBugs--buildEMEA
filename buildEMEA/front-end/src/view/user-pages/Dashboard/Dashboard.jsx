@@ -17,7 +17,7 @@ function Dashboard() {
     </div>
     <img className='image1' src={image1} alt="shamil"/>
     <h3 className='H3'>Shamil</h3>
-    <h4 classname='H4'>Assistant professor,
+    <h4 className='H4'>Assistant professor,
     Department of CS</h4>
     </div>
   )

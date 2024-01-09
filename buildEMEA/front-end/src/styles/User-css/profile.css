@@ -1,0 +1,23 @@
+.H1
+{
+    color:rgb(255, 255, 255);
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 1000;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+.box {
+    
+    width: 450px;
+    height: 500px;
+    background-color: #ffffffa7;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+  top: 190px;
+  left: 610px;
+  }
+  
