@@ -1,4 +1,4 @@
-.contact-container {
+.admin-profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,6 +8,14 @@
     border-radius: 10px;
     background-color: rgba(158, 158, 158, 0.622);
   
+  }
+  
+  .admin-avatar {
+    height: 110px;
+    width: 110px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
   }
   
   .flex-col {
@@ -32,13 +40,6 @@
   }
   
   .info-box {
-    background-color: #261046;
+    background-color: #3C0429;
     color: #fff;
-  }
-  
-  .contact-box {
-    background: linear-gradient(to right, #501794, #3E70A1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }

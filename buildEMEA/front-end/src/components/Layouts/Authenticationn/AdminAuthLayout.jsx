@@ -3,7 +3,7 @@ import { useNavigate , Navigate } from 'react-router-dom';
 import { useStateContext } from "../../../context/ContextProvider";
 import { Outlet ,Link} from 'react-router-dom';
 import Logo from '../../../assets/Logo.svg';
-import BGIMAGE from '../../../images/Admin-bg/admin-buildEMEA.png';
+import '../../../styles/general-css/Auth.css'
 
 function AuthLayout() {
   const { user, token , role} = useStateContext();
@@ -18,14 +18,14 @@ function AuthLayout() {
     }
     }
   return (
-    <div className=''>
+    <div className='background-auth admin-auth'>
       {/* Logo */}
       <Link to='/'>
      
         <img src={Logo} className='absolute top-0 left-16'/>
       </Link>
       {/* Bacground image */}
-      <img src={BGIMAGE} className='absolute inset-0 w-full h-full object-cover z-[-1]'/>
+      {/* <img src={BGIMAGE} className='absolute inset-0 w-full h-full object-cover z-[-1]'/> */}
 
       
 

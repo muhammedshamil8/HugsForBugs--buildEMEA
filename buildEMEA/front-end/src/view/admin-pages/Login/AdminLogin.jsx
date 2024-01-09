@@ -56,7 +56,9 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className='container'>
+    <div className=" h-screen p-2 flex items-center justify-center">
+      
+    <div >
 
       <div className='admin-SignInPage--parent'>
         <div className='admin-login-message'>
@@ -78,7 +80,7 @@ const AdminLogin = () => {
             <Form name="adminLogin" onFinish={onFinish}>
             {message &&
             <div className="alert">
-              <p>{message}</p>
+              <p className="text-rose-400 p-2 mb-2">{message}</p>
              
             </div>
           }
@@ -97,7 +99,7 @@ const AdminLogin = () => {
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
                 <Input
-                  className='admin-login-input'
+                  className='admin-login-input bg-red-200'
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
@@ -120,6 +122,7 @@ const AdminLogin = () => {
 
         </div>
       </div>
+    </div>
     </div>
 
 

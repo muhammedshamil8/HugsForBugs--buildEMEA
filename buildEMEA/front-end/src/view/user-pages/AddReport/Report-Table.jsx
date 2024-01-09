@@ -6,8 +6,8 @@ function ReportTable() {
     const { id } = useParams();
 
     return (
-        <div>
-            <button onClick={() => navigate('/addreport')} className='bg-green-300'>Back TO Report List</button>
+        <div className='bg-rose-300 h-screen'>
+            <Link to="/addreport" className='bg-green-300'>Back TO Report List</Link>
 
             <p>
                 Report Table

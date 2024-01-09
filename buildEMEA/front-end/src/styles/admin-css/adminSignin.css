@@ -3,12 +3,6 @@
     --primary-color: #3C0429;
 }
 
-.container {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    position: relative;
-}
 
 .admin-SignInPage--parent {
     width: 100%;
@@ -45,7 +39,7 @@
 
     min-width: 500px;
     max-width: 500px;
-    height: 450px;
+    min-height: 450px;
     padding: 50px 80px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -75,15 +69,15 @@
     height: 50px;
     border: none;
     border-radius: 5px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color) !important;
     color: #fff;
     padding: 0 10px;
     margin-bottom: 15px;
     outline: none;
 }
 
-.ant-input {
-    background-color: var(--primary-color);
+.ant-input-admin {
+    background-color: transparent !important;
     color: #fff;
 }
 
@@ -141,10 +135,10 @@
 
     .admin-login-container {
         flex: 1;
-        min-width: 450px;
+        min-width: 420px;
         max-width: 450px;
         height: 400px;
-        padding: 50px 80px;
+        padding: 40px 60px;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         background-color: #6463632a;

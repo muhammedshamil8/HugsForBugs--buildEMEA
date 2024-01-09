@@ -1,22 +1,17 @@
 /* adminSignin.css */
 :root {
-  --primary-color: #261046;
+  --user-primary-color: #261046;
 }
 
-.container {
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  position: relative;
-}
 
-.admin-SignInPage--parent {
+
+.user-SignInPage--parent {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
 
-.admin-login-message {
+.user-login-message {
   color: #fff;
   font-size: 30px;
   position: absolute;
@@ -25,7 +20,7 @@
   text-transform: uppercase;
 }
 
-.admin-login-message p {
+.user-login-message p {
   text-transform: uppercase;
 
   margin-bottom: 0;
@@ -35,17 +30,17 @@
   margin-bottom: 10px;
 }
 
-.admin-login-message p span {
+.user-login-message p span {
   color: #FF008A;
   font-weight: 700;
 }
 
 
-.admin-login-container {
+.user-login-container {
 
   min-width: 500px;
   max-width: 500px;
-  height: 450px;
+  min-height: 450px;
   padding: 50px 80px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -71,11 +66,11 @@
   position: relative;
 }
 
-.admin-login-input {
+.user-login-input {
   height: 50px;
   border: none;
   border-radius: 5px;
-  background-color: var(--primary-color);
+  background-color: var(--user-primary-color);
   color: #fff;
   padding: 0 10px;
   margin-bottom: 15px;
@@ -83,7 +78,7 @@
 }
 
 .ant-input {
-  background-color: var(--primary-color);
+  background-color: transparent !important ;
   color: #fff;
 }
 
@@ -91,20 +86,20 @@
   color: #e6e6e675;
 }
 
-.login-form-button {
+.user-login-form-button {
   width: 100%;
   height: 40px;
   border: none;
   border-radius: 5px;
-  background: linear-gradient(to right, var(--primary-color), #3E70A1);
+  background: linear-gradient(to right, var(--user-primary-color), #3E70A1);
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.login-form-button:hover {
+.user-login-form-button:hover {
   color: rgb(255, 255, 255) !important;
-  background: linear-gradient(to right, #3E70A1, var(--primary-color));
+  background: linear-gradient(to right, #3E70A1, var(--user-primary-color));
 }
 
 .hr {
@@ -130,28 +125,26 @@
 }
 
 @media (max-width: 800px) {
-  .container {
-      flex-direction: column-reverse;
-  }
 
-  .admin-SignInPage--parent {
+
+  .user-SignInPage--parent {
       flex-direction: column;
       align-items: center;
   }
 
-  .admin-login-container {
+  .user-login-container {
       flex: 1;
-      min-width: 450px;
+      min-width: 430px;
       max-width: 450px;
       height: 400px;
-      padding: 50px 80px;
+      padding: 40px 60px;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       background-color: #6463632a;
       margin-bottom: 20px;
   }
 
-  .admin-login-message {
+  .user-login-message {
       height: 100px;
       color: #fff;
       font-size: 30px;

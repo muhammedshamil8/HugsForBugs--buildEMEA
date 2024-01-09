@@ -1,8 +1,8 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { NavLink, Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
 import { useStateContext } from "../../../context/ContextProvider";
 import axiosClient from "../../../axios-client.js";
-
+import { Button, Drawer } from 'antd';
 // icons importing and images
 import AddReportIcon from '../../../assets/icons/addreport.svg';
 import ContactIcon from '../../../assets/icons/contact.svg';
@@ -19,6 +19,19 @@ import { LoginOutlined } from '@ant-design/icons';
 function AdminLayout() {
   const { user, token, setUser, setToken, notification, role, setRole } = useStateContext();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const drawerHeaderClassName = 'drawer-header';
+  const drawerHeaderClassName2 = 'drawer-body';
+  const drawerHeaderClassName3 = 'drawer-wrapper';
+  const showDrawer = () => {
+
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
+
   if (!token) {
     return <Navigate to="/adminlogin" />
   } else if (role !== 'admin') {
@@ -41,10 +54,22 @@ function AdminLayout() {
   }
 
   useEffect(() => {
+    fetchUser();
+  }, [])
+
+  function fetchUser() {
+
     axiosClient.get('/user')
       .then(({ data }) => {
         setUser(data)
       })
+      .catch((error) => {
+        if (error.response && error.response.status === 429) {
+          setTimeout(() => {
+            fetchUser()
+          }, 1000);
+        }
+      });
     if (user) {
       if (role === 'admin') {
         if (user.role === 'user') {
@@ -54,13 +79,13 @@ function AdminLayout() {
         }
       }
     }
-  }, [user, role, setUser, setToken, setRole])
+  }
 
 
   return (
-    <div>
+    <div className='admin-body'>
       {/* background image */}
-      <img src={BGIMAGE}
+      {/* <img src={BGIMAGE}
         className='
         absolute 
         inset-0 
@@ -68,7 +93,7 @@ function AdminLayout() {
         h-full 
         object-cover 
         z-[-1]   
-        background' />
+        background' /> */}
 
       {/* header */}
       <header className='
@@ -80,19 +105,34 @@ function AdminLayout() {
           w-full
           flex
           items-center
-          justify-end
-          backdrop-blur-md 
-          header'
+          justify-around
+          backdrop-blur-md
+          xl:justify-end 
+          header
+          z-50'
       >
-        <div className='flex items-center mr-44 p-10 h-full'>
-          {/* username */}
-          <div>
-            <p className='mr-4 text-white'>{user.name}</p>
-          </div>
+        <div>
 
-          {/* Avatar */}
-          <div className='bg-white rounded-2xl w-10 overflow-hidden'>
-            <img src={Avatar} alt='avatar' />
+          <Button className='responsive-side-bar' onClick={showDrawer}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+
+          </Button>
+        </div>
+        <div>
+          <div className='flex items-center  p-10 h-full xl:mr-44 mr-2'>
+            {/* username */}
+            <div>
+              <p className='mr-4 text-white'>{user.name}</p>
+            </div>
+
+            {/* Avatar */}
+            <div className='bg-white rounded-2xl w-10 overflow-hidden'>
+              <img src={Avatar} alt='avatar' />
+            </div>
           </div>
         </div>
       </header>
@@ -106,7 +146,7 @@ function AdminLayout() {
         w-44
         h-full
       bg-white/10
-      border-r-white 
+      border-r-white/10 
         backdrop-blur-md 
         flex
         flex-col
@@ -164,11 +204,76 @@ function AdminLayout() {
         pt-4
         ml-44
         mt-20
-      text-black ">
+      text-white 
+      overflow-x-visible
+      overflow-y-hidden
+      z-0">
 
-        <Outlet />
+        <Outlet className="overflow-x-scroll"/>
       </main>
+      {notification &&
+        <div className="notification">
+          {notification}
+        </div>
+      }
 
+
+
+
+      <Drawer title={<Link to='/'>
+        <img src={Logo} alt="Logo"
+          className='
+              w-28
+              mx-auto
+              cursor-pointer
+              mt-1
+            '/>
+      </Link>} placement="left" onClose={onClose} open={open} classNames={{
+        header: drawerHeaderClassName,
+        body: drawerHeaderClassName2,
+        wrapper: drawerHeaderClassName3,
+      }}>
+
+        <aside
+          className='
+        left-0 
+        top-0 
+        w-full
+        h-full
+        bg-white/10
+        flex
+        flex-col
+        justify-start
+        items-center
+      '>
+
+
+          <nav
+            className='
+          flex-1
+          w-full
+          p-3
+        '>
+            <ul
+              className='
+            flex
+            flex-col
+            gap-4
+            items-center
+            text-white
+          '>
+              <NavLink to='/admindashboard' className='hover:text-gray-300' activeClassName='active-link'><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+              <NavLink to='/category' className='hover:text-gray-300' activeClassName='active-link'><img src={AddReportIcon} className='icon' />Category</NavLink>
+
+              <NavLink to='/users' className='hover:text-gray-300' activeClassName='active-link'><img src={ContactIcon} className='icon' />Users</NavLink>
+              <NavLink to='/adminprofile' className='hover:text-gray-300' activeClassName='active-link'><img src={ProfileIcon} className='icon' />Profile</NavLink>
+              <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
+            </ul>
+          </nav>
+
+
+        </aside>
+      </Drawer>
     </div>
   );
 }

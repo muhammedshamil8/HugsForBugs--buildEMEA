@@ -6,6 +6,19 @@
   top: 0;
   z-index: 8;
 }
+.body{
+  background-color: rgba(128, 128, 128, 0.171);
+  background-image: url('../../images/User-bg/User-buildEMEA.jpg');
+  background-size: cover;
+background-repeat: no-repeat;
+background-position: 100% 100%;
+position: absolute;
+width: 100%;
+height: 100vh;
+margin: 0;
+overflow-x: scroll;
+overflow-y: scroll;
+}
 nav a{
   list-style-type: none;
   padding: 8px 10px;

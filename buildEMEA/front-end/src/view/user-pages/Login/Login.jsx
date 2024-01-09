@@ -56,17 +56,19 @@ const Login = () => {
   };
 
   return (
-    <div className='container'>
+    <div className=' h-screen p-2 flex items-center justify-center'>
 
-      <div className='admin-SignInPage--parent'>
-        <div className='admin-login-message'>
+    <div>
+
+      <div className='user-SignInPage--parent'>
+        <div className='user-login-message'>
           <p>SIGN IN TO YOUR
             <br /><span>ADMIN PANEL!</span></p>
 
         </div>
 
 
-        <div className="admin-login-container">
+        <div className="user-login-container">
           
           <div className='auth-header'>
             <h1>
@@ -79,7 +81,7 @@ const Login = () => {
             <Form name="adminLogin" onFinish={onFinish}>
             {message &&
             <div className="alert">
-              <p>{message}</p>
+              <p className="text-rose-400 p-2 mb-2">{message}</p>
              
             </div>
           }
@@ -89,7 +91,7 @@ const Login = () => {
                 rules={[{ required: true, message: 'Please input your email!' }]}
               >
                 <Input
-                  className='admin-login-input'
+                  className='user-login-input'
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Email"
                 />
@@ -99,14 +101,14 @@ const Login = () => {
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
                 <Input
-                  className='admin-login-input'
+                  className='user-login-input'
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
                 />
               </Form.Item>
               <Form.Item>
-                <Button htmlType="submit" className="login-form-button">
+                <Button htmlType="submit" className="user-login-form-button">
                   Log in
                 </Button>
               </Form.Item>
@@ -124,6 +126,7 @@ const Login = () => {
       </div>
     </div>
 
+    </div>
 
   );
 };

@@ -26,7 +26,7 @@ function AddReport() {
   }
 
   return (
-    <div>
+    <div className='bg-rose-300 h-screen'>
       Add-Report
       <Row gutter={[8, 8]}>
         {cards.map((card, index) => (

@@ -9,6 +9,7 @@ function NotFound() {
   }
   return (
 
+<div className='w-full h-screen bg-rose-200 flex items-center justify-center'>
 
     <Result
       status="404"
@@ -16,6 +17,7 @@ function NotFound() {
       subTitle="Sorry, the page you visited does not exist."
       extra={<Button  className='bg-sky-500 hover:bg-sky-200' onClick={backtoHome}>Back Home</Button>}
     />
+</div>
 
   )
 }

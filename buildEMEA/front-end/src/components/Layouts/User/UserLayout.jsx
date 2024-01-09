@@ -21,11 +21,11 @@ function UserLayout() {
   const { user, token, setUser, setToken, notification, role, setRole } = useStateContext();
   const navigate = useNavigate();
 
-  // if (!token) {
-  //   return <Navigate to="/login" />
-  // } else if (role !== 'user') {
-  //   return <Navigate to="/login" />
-  // }
+  if (!token) {
+    return <Navigate to="/login" />
+  } else if (role !== 'user') {
+    return <Navigate to="/login" />
+  }
 
   // unauth
 
@@ -44,10 +44,21 @@ function UserLayout() {
   }
 
   useEffect(() => {
+    fetchUser();
+  }, [])
+  
+  function fetchUser() {
     axiosClient.get('/user')
       .then(({ data }) => {
         setUser(data)
       })
+      .catch((error) => {
+        if (error.response && error.response.status === 429) {
+          setTimeout(() => {
+            fetchUser()
+          }, 1000); 
+        } 
+      });
     if (user) {
       if (role === 'user') {
         if (user.role === 'admin') {
@@ -57,7 +68,8 @@ function UserLayout() {
         }
       }
     }
-  }, [user, role, setUser, setToken, setRole])
+    
+  }
 
 
   return (
@@ -109,7 +121,7 @@ function UserLayout() {
         w-44
         h-full
       bg-white/10
-      border-r-white 
+      border-r-white/10 
         backdrop-blur-md 
         flex
         flex-col
@@ -189,7 +201,7 @@ function UserLayout() {
         pt-4
         ml-44
         mt-20
-      text-black ">
+      text-white ">
 
         <Outlet />
       </main>

@@ -34,7 +34,7 @@
 }
   
   
-@media (max-width: 640px) {
+@media (max-width: 400px) {
     body{
         background-color: #f7fafc;
         display: none;
