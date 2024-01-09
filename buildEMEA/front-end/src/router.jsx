@@ -14,6 +14,7 @@ import AdminAuthLayout from "./components/Layouts/Authenticationn/AdminAuthLayou
 import UnAuth from "./view/NotFound-page/UnAuth-403";
 import AddReport from "./view/user-pages/AddReport/Add-Report";
 import ReportTable from "./view/user-pages/AddReport/Report-Table";
+import Contact from "./view/user-pages/Contact/Contact";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/contact",
+                element: <Contact />
             },
             {
                 path: "/addreport",
