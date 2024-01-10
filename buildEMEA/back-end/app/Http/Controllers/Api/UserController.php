@@ -7,6 +7,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::query()->orderBy('id', 'desc')->paginate(10));
+        return UserResource::collection(User::all());
     }
 
     /**
@@ -75,5 +77,18 @@ class UserController extends Controller
         $user->delete();
 
         return response("", 204);
+    }
+    public function getAuthenticatedUser()
+    {
+        $user = Auth::user();
+
+        return response()->json($user);
+    }
+    public function usersWithCategory()
+    {
+       
+        $users = DB::table('users')->whereNotNull('category_id')->get();
+    
+        return response()->json($users);
     }
 }

@@ -24,8 +24,10 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|string|max:55',
+            'category_id' => 'required|exists:categories,id',
+            'category_name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
@@ -34,5 +36,13 @@ class StoreUserRequest extends FormRequest
                     ->symbols(),
             ]
         ];
+
+        // Check the user's role and adjust validation rules accordingly
+        if ($this->user() && $this->user()->role == 'user') {
+            $rules['category_name'] = 'required|string';
+            $rules['category_id'] = 'required'; 
+        }
+
+        return $rules;
     }
 }

@@ -26,6 +26,8 @@ class SignupRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'category_id' => 'nullable|exists:categories,id',
+            'category_name' => 'nullable|string',
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => [
                 'required',
