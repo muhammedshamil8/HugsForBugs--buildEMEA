@@ -1,41 +1,96 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
+import axiosClient from "../../../axios-client.js";
 import { Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
+
+
 function AddReport() {
+  const [tabledata, setTabledata] = useState([]);
+  const [tableCategory, setTableCategory] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
   const navigate = useNavigate();
   const style = {
     background: '#0092ff',
     padding: '8px 0',
   };
 
-  const cards = [
-    { id: 1, description: 'qweertyy', name: 'Card 1' },
-    { id: 2, description: 'qweertyy', name: 'Card 2' },
-    { id: 3, description: 'qweertyy', name: 'Card 3' },
-    { id: 4, description: 'qweertyy', name: 'Card 4' },
-    { id: 5, description: 'qweertyy', name: 'Card 5' },
-    { id: 6, description: 'qweertyy', name: 'Card 6' },
-    { id: 7, description: 'qweertyy', name: 'Card 7' },
-    { id: 8, description: 'qweertyy', name: 'Card 8' },
-  ];
 
-  function CardOpen(id) {
+
+  function CardOpen(table, id) {
     console.log(id);
-    navigate(`/addreport/${id}`);
+    console.log(table);
+    navigate(`/addreport/${id}/${table}`);
   }
 
+  function fetchTablesData() {
+    axiosClient
+      .get("/tables/1")
+      .then((res) => {
+        console.log(res
+
+          );
+          setTabledata(res.data);
+
+      })
+      .catch((err) => {
+        console.log(err);
+
+      });
+  }
+  // function fetchtable() {
+  //   axiosClient
+  //     .get("/table-data/1")
+  //     .then((res) => {
+  //       setTableCategory(res);
+
+  //       console.log(res);
+  //       // notification(res.data.message, "success");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       // notification(err.response.data.message, "danger");
+
+  //     });
+  // }
+  useEffect(() => {
+    fetchTablesData();
+    fetchUser();
+
+  }, [])
+
+  function fetchUser() {
+  
+    axiosClient.get('/logged-user')
+      .then(({ data }) => {
+        setCurrentUser(data)
+        console.log(data);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 429) {
+          setTimeout(() => {
+            fetchUser()
+          }, 1000);
+        }
+      });
+  }
   return (
-    <div className='bg-rose-300 h-screen'>
-      Add-Report
-      <Row gutter={[8, 8]}>
-        {cards.map((card, index) => (
-          <Col key={index} className="gutter-row" span={6} xs={24} sm={12} md={8} lg={6}>
-            <div style={style}>
-              <h1>{card.name}</h1>
-              <p>{card.description}</p>
-              <p>{card.id}</p>
-              <button onClick={() => CardOpen(card.id)}>Open</button>
+    <div className=' h-screen'>
+      <div className='text-xl font-bold'>
+        <h1>{currentUser.category_name}Add-Report</h1>
+      </div>
+      
+      
+      <Row gutter={[8, 8]} className='p-4 '>
+        {tabledata.map((card) => (
+          <Col key={card.id} className="gutter-row m-auto" span={6} xs={24} sm={12} md={12} lg={8} >
+            <div className=' p-8 max-w-96 rounded-lg bg-white/20 backdrop-blur-md m-1 flex flex-col justify-between max-h-72 min-h-44 cursor-pointer'>
+              <h1 className='text-md font-semibold'>{card.name}</h1>
+              <p className='text-[17px] text-left'>{card.short_description}</p>
+              <div className='flex justify-end'>
+              <button onClick={() => CardOpen(card.name, card.id)} className='bg-rose-600 p-1 px-3 rounded-xl hover:bg-rose-800 transition-all ease-in-out'>Open</button>
+              </div>
+             
             </div>
           </Col>
         ))}

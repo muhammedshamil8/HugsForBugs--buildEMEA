@@ -69,4 +69,19 @@ h2
     margin-top:  0px;
     margin-left: 400px;    
 }
-
+.section-1-dashboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-gap: 5px;
+}
+@media (max-width: 768px) {
+    .section-1-dashboard{
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-gap: 5px;
+    }
+    .empty{
+        display: none;
+    }
+    
+}

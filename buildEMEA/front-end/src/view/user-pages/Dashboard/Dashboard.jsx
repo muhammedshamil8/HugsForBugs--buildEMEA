@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../../styles/User-css/dashboard.css';
-import ImageDashboard from '../../../images/User-bg/unon xmas 2.jpg';
+import ImageDashboard from '../../../images/iqacdashboard.jpg';
 
 function Dashboard() {
   return (
@@ -12,9 +12,9 @@ function Dashboard() {
         ( Internal Quality Assurance Cell )
       </p>
     </div>
-    <section className="w-full min-h-40   p-2  grid grid-cols-2">
+    <section className="w-full min-h-40   p-2  section-1-dashboard">
       <div className="w-full flex justify-around items-center  rounded-md">
-        <div></div>
+        <div className='empty'></div>
         <img src={ImageDashboard} alt="iqac dashboard" className=" rounded-xl max-w-64" />
       </div>
       <div className="w-full p-4 ">

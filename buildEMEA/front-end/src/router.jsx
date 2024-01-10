@@ -18,6 +18,7 @@ import Users from "./view/admin-pages/User/Users";
 import UserForm from './view/admin-pages/User/UserForm';
 import Category from "./view/admin-pages/Category/Category";
 import Contact from "./view/user-pages/Contact/Contact";
+import ReportForm from "./view/user-pages/AddReport/New-Report";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -48,8 +49,12 @@ const router = createBrowserRouter([
                 element: <AddReport />
             },
             {
-                path: "/addreport/:id",
+                path: "/addreport/:id/:table",
                 element: <ReportTable />
+            },
+            {
+                path: "/addreport/:id/:table/:rowId",
+                element: <ReportForm />
             },
         ]
     },

@@ -40,15 +40,15 @@ function UserLayout() {
     setUser({})
     setToken(null)
     navigate('/login');
-
   }
 
   useEffect(() => {
     fetchUser();
   }, [])
-  
+
   function fetchUser() {
-    axiosClient.get('/user')
+
+    axiosClient.get('/logged-user')
       .then(({ data }) => {
         setUser(data)
       })
@@ -56,19 +56,18 @@ function UserLayout() {
         if (error.response && error.response.status === 429) {
           setTimeout(() => {
             fetchUser()
-          }, 1000); 
-        } 
+          }, 1000);
+        }
       });
     if (user) {
-      if (role === 'user') {
-        if (user.role === 'admin') {
+      if (role === 'admin') {
+        if (user.role === 'user') {
           setRole(null);
           setToken(null);
           navigate('/403');
         }
       }
     }
-    
   }
 
 
@@ -97,6 +96,7 @@ function UserLayout() {
   items-center
   justify-end
   backdrop-blur-md 
+  z-50
   header'
       >
         <div className='flex items-center mr-44 p-10 h-full'>
@@ -159,10 +159,10 @@ function UserLayout() {
             items-center
             text-white
           '>
-            <NavLink to='/dashboard' className='hover:text-gray-300' activeClassName='active-link'><img src={HomeIcon} className='icon' />Dashboard</NavLink>
-            <NavLink to='/addreport' className='hover:text-gray-300' activeClassName='active-link'><img src={AddReportIcon} className='icon' />Add report</NavLink>
-            <NavLink to='/profile' className='hover:text-gray-300' activeClassName='active-link'><img src={ProfileIcon} className='icon' />Profile</NavLink>
-            <NavLink to='/contact' className='hover:text-gray-300' activeClassName='active-link'><img src={ContactIcon} className='icon' />Contact</NavLink>
+            <NavLink to='/dashboard' className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+            <NavLink to='/addreport' className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Add report</NavLink>
+            <NavLink to='/profile' className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
+            <NavLink to='/contact' className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Contact</NavLink>
             <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
           </ul>
         </nav>
@@ -200,6 +200,7 @@ function UserLayout() {
         px-8 
         pt-4
         ml-44
+        z-10
         mt-20
       text-white ">
 

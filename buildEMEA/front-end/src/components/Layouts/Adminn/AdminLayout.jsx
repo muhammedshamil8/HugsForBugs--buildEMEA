@@ -59,9 +59,10 @@ function AdminLayout() {
 
   function fetchUser() {
 
-    axiosClient.get('/user')
+    axiosClient.get('/logged-user')
       .then(({ data }) => {
         setUser(data)
+        console.log(data);
       })
       .catch((error) => {
         if (error.response && error.response.status === 429) {
@@ -184,11 +185,11 @@ function AdminLayout() {
             items-center
             text-white
           '>
-            <NavLink to='/admindashboard' className='hover:text-gray-300' activeClassName='active-link'><img src={HomeIcon} className='icon' />Dashboard</NavLink>
-            <NavLink to='/category' className='hover:text-gray-300' activeClassName='active-link'><img src={AddReportIcon} className='icon' />Category</NavLink>
+            <NavLink to='/admindashboard' className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+            <NavLink to='/category' className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
 
-            <NavLink to='/users' className='hover:text-gray-300' activeClassName='active-link'><img src={ContactIcon} className='icon' />Users</NavLink>
-            <NavLink to='/adminprofile' className='hover:text-gray-300' activeClassName='active-link'><img src={ProfileIcon} className='icon' />Profile</NavLink>
+            <NavLink to='/users' className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
+            <NavLink to='/adminprofile' className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
             <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
           </ul>
         </nav>
@@ -206,7 +207,7 @@ function AdminLayout() {
         mt-20
       text-white 
       overflow-x-visible
-      overflow-y-hidden
+      overflow-y-visible
       z-0">
 
         <Outlet className="overflow-x-scroll"/>
@@ -262,11 +263,11 @@ function AdminLayout() {
             items-center
             text-white
           '>
-              <NavLink to='/admindashboard' className='hover:text-gray-300' activeClassName='active-link'><img src={HomeIcon} className='icon' />Dashboard</NavLink>
-              <NavLink to='/category' className='hover:text-gray-300' activeClassName='active-link'><img src={AddReportIcon} className='icon' />Category</NavLink>
+              <NavLink to='/admindashboard' className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+              <NavLink to='/category' className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
 
-              <NavLink to='/users' className='hover:text-gray-300' activeClassName='active-link'><img src={ContactIcon} className='icon' />Users</NavLink>
-              <NavLink to='/adminprofile' className='hover:text-gray-300' activeClassName='active-link'><img src={ProfileIcon} className='icon' />Profile</NavLink>
+              <NavLink to='/users' className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
+              <NavLink to='/adminprofile' className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
               <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
             </ul>
           </nav>
