@@ -3,13 +3,20 @@ import axiosClient from "../../../axios-client.js";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined ,LeftOutlined  } from '@ant-design/icons';
-import { Popconfirm } from 'antd';
+import { Popconfirm , message } from 'antd';
 
 function ReportTable() {
+  const [messageApi, contextHolder] = message.useMessage();
   const [tableCategory, setTableCategory] = useState([]);
   const [tabledataAll, setTabledataAll] = useState([]);
   const navigate = useNavigate();
   const { id, table } = useParams();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'data deleted successfully',
+    });
+  };
 
   function fetchdata() {
     axiosClient
@@ -42,10 +49,13 @@ function ReportTable() {
     axiosClient
       .delete(`/table-data/${id}/${rowId}`)
       .then((response) => {
-        console.log('Value deleted successfully');
+        // console.log('Value deleted successfully');
         // console.log(rowId);
+        success();
         // If you need to refresh the table after deletion, you can refetch the data here
-        fetchdata();
+        setTimeout(() => {
+          fetchdata();
+        }, 600);
       })
       .catch((error) => {
         // console.error('Error deleting value', error);
@@ -54,6 +64,7 @@ function ReportTable() {
 
   return (
     <div className='h-screen p-8 overflow-visible min-w-fit'>
+       {contextHolder}
       <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
       <LeftOutlined />
       </Link>

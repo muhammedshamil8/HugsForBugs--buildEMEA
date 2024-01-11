@@ -1,8 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from "../../../axios-client.js";
 import { useParams, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 function ReportForm() {
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Data Created successfully',
+    });
+  };
+  const success2 = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Data updated successfully',
+    });
+  };
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'Please fill in all fields.',
+    });
+  };
   const { id, rowId, table } = useParams();
   const [headers, setHeaders] = useState([]);
   const [rowData, setRowData] = useState({});
@@ -79,6 +99,7 @@ function ReportForm() {
     if (formData.some(item => item.value.trim() === '')) {
       // console.log('Please fill in all fields.');
       setMessage('Please fill in all fields.');
+      error();
       return;
     }
 
@@ -90,8 +111,11 @@ function ReportForm() {
 
       Promise.all(updateRequests)
         .then((responses) => {
+          success2();
           console.log('Values updated successfully', responses.map(res => res.data));
-          navigate(`/addreport/${id}/${table}`);
+          setTimeout(() => {
+            navigate(`/addreport/${id}/${table}`);
+          }, 1000);
         })
         .catch((err) => {
           // console.error('Error updating values:', err);
@@ -101,7 +125,11 @@ function ReportForm() {
       axiosClient.post('/insert-values', { values: formData })
         .then((res) => {
           console.log('Values inserted successfully', res.data);
-          navigate(`/addreport/${id}/${table}`);
+          success();
+          setTimeout(() => {
+
+            navigate(`/addreport/${id}/${table}`);
+          }, 1000);
         })
         .catch((err) => {
           // console.error('Error inserting values:', err);
@@ -111,6 +139,7 @@ function ReportForm() {
 
   return (
     <div className=' h-screen p-8'>
+      {contextHolder}
       <div className='flex flex-col justify-between  '>
         <div className='flex '>
           <h1 className='font-bold text-xl mb-4'>{rowId && rowId !== 'new' ? 'Edit' : 'New'} Report</h1>

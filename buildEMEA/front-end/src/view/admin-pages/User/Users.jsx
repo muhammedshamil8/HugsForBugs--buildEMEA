@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
-import { Col, Row, Skeleton, Button, Popconfirm , Empty } from 'antd';
+import { Col, Row, Skeleton, Button, Popconfirm , Empty , message } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import avatar from '../../../images/avatar.png'
 
 
 export default function Users() {
+  const [messageApi, contextHolder] = message.useMessage();
   const [users, setUsers] = useState([]);
   const { token, role } = useStateContext();
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -18,6 +19,12 @@ export default function Users() {
     fetchData(currentPage);
   }, [currentPage]);
 
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'User was successfully deleted',
+    });
+  };
   const onDeleteClick = (user) => {
     // if (!window.confirm("Are you sure you want to delete this user?")) {
     //   return;
@@ -25,7 +32,8 @@ export default function Users() {
     axiosClient
       .delete(`/admin/users/${user.id}`)
       .then(() => {
-        setNotification("User was successfully deleted");
+        success();
+        // setNotification("");
         fetchData();
       })
       .catch((error) => {
@@ -78,6 +86,7 @@ export default function Users() {
 
   return (
     <div className=" h-screen p-4 overflow-visible ">
+      {contextHolder}
       <div className="flex  flex-col  mb-4">
         <div>
 
