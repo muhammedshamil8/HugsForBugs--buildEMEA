@@ -1,8 +1,8 @@
 <?php
-
+// User.php
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'category_id', 
+        'category_id',
         'category_name',
         'role',
     ];
@@ -45,6 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Define the relationship with category
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

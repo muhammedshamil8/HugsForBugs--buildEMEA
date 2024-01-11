@@ -12,16 +12,15 @@ function AdminDashboard() {
           ( Internal Quality Assurance Cell )
         </p>
       </div>
-      <section className="w-full min-h-40   p-2  grid grid-cols-2">
+      <main className='max-w-4xl m-auto'>
+      <section className="w-full min-h-40   p-2  grid grid-cols-2 section-1-dashboard ">
         <div className="w-full flex justify-around items-center  rounded-md">
-          <div></div>
+          <div className='empty'></div>
           <img src={ImageDashboard} alt="iqac dashboard" className=" rounded-xl max-w-64" />
         </div>
         <div className="w-full p-4 ">
           <p className='max-w-xl'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la
-          boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+          IQAC , where excellence meets confidentiality. IQAC is the guardian of academic quality, driven by a vision of continuous improvement. Committed to professionalism, we monitor and enhance academic processes, ensuring secure, confidential handling of sensitive information. Join us on the journey towards educational excellence, where every endeavor is measured against the yardstick of quality.
           </p>
          
         </div>
@@ -40,6 +39,7 @@ function AdminDashboard() {
           </p>
         </div>
       </section>
+    </main>
     </div>
   )
 }

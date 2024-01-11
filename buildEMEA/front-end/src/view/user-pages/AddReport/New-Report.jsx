@@ -15,14 +15,14 @@ function ReportForm() {
     // Fetch headers
     axiosClient.get(`/table-info/${id}`)
       .then((res) => {
-        setHeaders(res.data);
+        setHeaders(res);
       })
       .catch((err) => {
         console.log(err);
       });
   
     // Fetch row data based on rowId
-    axiosClient.get(`/get-row-data/${rowId}`)
+    axiosClient.get(`/get-row-data/${id}/${rowId}}`)
       .then((res) => {
         setRowData(res.data);
         // Initialize formData based on headers and row data

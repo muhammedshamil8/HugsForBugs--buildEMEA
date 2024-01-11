@@ -50,7 +50,7 @@ function fetchUser() {
         </div>
         <div className="info-box">
           <label>Category</label>
-          <p >{user.category_id && user.category.name || 'Not Have'}</p>
+          <p >{user.category_id && user.category || 'Not Have'}</p>
         </div >
         <div className="info-box">
           <label>Category Name</label>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
-import { Col, Row , Skeleton } from 'antd';
+import { Col, Row, Skeleton, Button, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import avatar from '../../../images/avatar.png'
 
@@ -19,9 +19,9 @@ export default function Users() {
   }, [currentPage]);
 
   const onDeleteClick = (user) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) {
-      return;
-    }
+    // if (!window.confirm("Are you sure you want to delete this user?")) {
+    //   return;
+    // }
     axiosClient
       .delete(`/admin/users/${user.id}`)
       .then(() => {
@@ -33,7 +33,7 @@ export default function Users() {
       });
   };
 
-  function fetchData(page) {
+  function fetchData() {
     setLoading(true);
 
     axiosClient.get(`/admin/users`)
@@ -46,7 +46,7 @@ export default function Users() {
       .catch((error) => {
         if (error.response && error.response.status === 429) {
           setTimeout(() => {
-            fetchData(page);
+            fetchData();
           }, 1000);
         } else {
           setLoading(false);
@@ -54,15 +54,15 @@ export default function Users() {
       });
   }
 
-  function fetchNextPage() {
-    const nextPage = currentPage + 1;
-    setCurrentPage(nextPage);
-  }
+  // function fetchNextPage() {
+  //   const nextPage = currentPage + 1;
+  //   setCurrentPage(nextPage);
+  // }
 
-  function fetchPrevPage() {
-    const prevPage = currentPage - 1;
-    setCurrentPage(prevPage);
-  }
+  // function fetchPrevPage() {
+  //   const prevPage = currentPage - 1;
+  //   setCurrentPage(prevPage);
+  // }
   const handleSearch = (e) => {
     const searchQuery = (e.target.value || '').toLowerCase();
 
@@ -116,11 +116,11 @@ export default function Users() {
             <Skeleton active />
           </div>
         ) : (
-          <Row gutter={[8, 8]} className="m-auto">
+          <Row gutter={[10, 10]} className="m-auto animate-pulse">
             {
               filteredUsers.map((u) => (
                 <Col className="gutter-row  gap-4 m-auto" span={6} xs={24} sm={12} md={12} lg={8} key={u.id}>
-                  <div className="max-h-72 flex bg-white/20 backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto mb-2 ">
+                  <div className="max-h-72 flex bg-white/20 backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto ">
                     <div className="bg-white rounded-xl ">
                       <img src={avatar} alt="avatar" className="w-16 h-16 rounded-full" />
                     </div>
@@ -132,12 +132,21 @@ export default function Users() {
                         <Link className="btn-edit  text-white py-1 px-2 rounded absolute top-2 right-10 hover:text-green-400" to={`/users/${u.id}`}>
                           <EditOutlined />
                         </Link>
-                        <button
-                          className="btn-delete  text-white py-1 px-2 rounded absolute top-2 right-2 hover:text-red-600 transition-all ease-in-out duration-500"
-                          onClick={() => onDeleteClick(u)}
+                        <Popconfirm
+                          title="Delete the task"
+                          description="Are you sure to delete this task?"
+                          okText="Yes"
+                          cancelText="No"
+                          okType="danger"
+                          onConfirm={() => onDeleteClick(u)}
                         >
-                          <DeleteOutlined />
-                        </button>
+                          <button
+                            className="btn-delete  text-white py-1 px-2 rounded absolute top-2 right-2 hover:text-red-600 transition-all ease-in-out duration-500"
+                            
+                          >
+                            <DeleteOutlined />
+                          </button>
+                        </Popconfirm>
                       </p>
                     </div>
 

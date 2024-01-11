@@ -19,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::all());
+        $users = User::where('role', 'user')->get();
+        return UserResource::collection($users);
     }
 
     /**
@@ -87,8 +88,8 @@ class UserController extends Controller
     public function usersWithCategory()
     {
        
-        $users = DB::table('users')->whereNotNull('category_id')->get();
+        $users = User::with('category')->whereNotNull('category_id')->get();
     
-        return response()->json($users);
+        return UserResource::collection($users);
     }
 }

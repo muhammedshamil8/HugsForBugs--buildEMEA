@@ -25,7 +25,7 @@ function Home() {
       {/* fade loading Effect */}
       <div className='overlay'>
       </div>
-      
+
       {/* Logo */}
       <Link to='/' className="absolute top-0 left-16">
         <img src={Logo} alt="Logo" />
@@ -39,12 +39,8 @@ function Home() {
         {/* Content */}
         <div className="text-white flex flex-col w-80 justify-center m-auto items-center">
           <div className="font-medium text-wrap text-xl w-80 m-10 leading-7">
-            Welcome to the Website!.
-            Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit,
-            sed deius mod tempor incidid
-            un t ut labore et doloremagn
-            a aliqua.
+            Welcome to  IQAC (Internal Quality Assurance Cell).
+            Where innovation fuels data driven insights for academic excellence and quality assurance. Be part of the journey !
           </div>
           <Link to='/login' className="text-center bg-gradient-to-r from-purple-500 to-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-400 text-white px-4 py-4 rounded-md mt-1 w-full focus:ring focus:outline-none transition-colors duration-300">
             Get Started

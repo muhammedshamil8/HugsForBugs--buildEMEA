@@ -2,18 +2,18 @@ import { React, useEffect, useState } from 'react';
 import axiosClient from "../../../axios-client.js";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { DeleteOutlined } from '@ant-design/icons';
-import { Popconfirm } from 'antd';
+import { DoubleLeftOutlined } from '@ant-design/icons';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
-function ReportTable() {
+function ReportDataTable() {
   const [tableCategory, setTableCategory] = useState([]);
   const [tabledataAll, setTabledataAll] = useState([]);
   const navigate = useNavigate();
-  const { id, table } = useParams();
+  const { category_id, table_id, table } = useParams();
 
   function fetchdata() {
     axiosClient
-      .get(`/table-data/${id}`)
+      .get(`/table-data/${table_id}`)
       .then((res) => {
         setTableCategory(res.data.data);
         console.log(res.data.data);
@@ -23,9 +23,9 @@ function ReportTable() {
       });
   }
 
-  function fetchTablesData(id) {
+  function fetchTablesData(table_id) {
     axiosClient
-      .get(`/table-info/${id}`)
+      .get(`/table-info/${table_id}`)
       .then((res) => {
         setTabledataAll(res.data);
       })
@@ -36,25 +36,50 @@ function ReportTable() {
 
   useEffect(() => {
     fetchdata();
-    fetchTablesData(id);
-  }, [id]);
+    fetchTablesData(table_id);
+  }, [table_id]);
 
-  const handleDelete = (rowId, id) => {
+  const handleDelete = (rowId, table_id) => {
     axiosClient
-    // .delete(`/delete-row/${id}/${rowId}`)
+      .delete(`/delete-row/${table_id}/${rowId}`)
 
     console.log('Value deleted successfully');
     console.log(rowId);
   };
 
+
+  function ExportToExcel(table) {
+    const tables = document.getElementsByTagName('table');
+    if (tables.length > 0) {
+      const table = tables[0].cloneNode(true);
+      const header = document.createElement('thead');
+      const cloneHeader = tables[0].getElementsByTagName('thead')[0].cloneNode(true);
+      header.appendChild(cloneHeader);
+
+      table.appendChild(header);
+
+      const blob = new Blob([table.outerHTML], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+      });
+
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `table_${table}.xlsx`;
+      link.click();
+    } else {
+      console.error('No table found to export.');
+    }
+  }
+
   return (
     <div className='h-screen p-8 overflow-visible min-w-fit'>
+      
+      <Link to={`/category`} className='bg-rose-600 py-1 px-2 text-md rounded-full transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
+        <DoubleLeftOutlined />
+      </Link>
       <div>
         <h3 className='text-2xl font-bold'>Table : {table}</h3>
       </div>
-      <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
-        Back to Report List
-      </Link>
 
       <div className='p-6 overflow-x-auto'>
         <div className='bg-white/10 backdrop-blur-lg p-8 rounded-lg'>
@@ -63,12 +88,17 @@ function ReportTable() {
           </p>
         </div>
         <div className='flex justify-end mt-6'>
-          <Link className="btn-add bg-rose-600 text-white py-1.5 px-4 rounded-full my-4 " to="new">
-            Add new
-          </Link>
-        </div>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="btn-add bg-green-600 text-white py-1.5 px-4 rounded-full my-4"
+          table="table-to-export"
+          filename={`table_${table}`}
+          sheet="table_data"
+          buttonText="Export to Excel"
+        />
+      </div>
 
-        <table className=' border border-gray-300 rounded-2xl overflow-hidden min-w-fit m-auto'>
+        <table id="table-to-export" className=' border border-gray-300 rounded-2xl overflow-hidden min-w-fit m-auto'>
           <thead className='bg-slate-100 text-indigo-900 font-bold '>
             <tr>
               <th className='p-2 rounded-tl-md'>Sl. No</th>
@@ -77,7 +107,6 @@ function ReportTable() {
                   {item.header}
                 </th>
               ))}
-              <th className='rounded-tr-md'>Actions</th>
             </tr>
           </thead>
           <tbody className='bg-white/80 text-center border text-black '>
@@ -91,30 +120,7 @@ function ReportTable() {
                       {item.values[index].row_id}
                     </td>
                   ))}
-                  <td className='items-center justify-center   flex flex-row-reverse my-10 p-2'>
 
-                    <Popconfirm
-                      title="Delete the task"
-                      description="Are you sure to delete this task?"
-                      okText="Yes"
-                      cancelText="No"
-                      okType="danger"
-                      onConfirm={() => handleDelete(`${value.row_id}`)}
-                    >
-                      <button
-                        className='hover:text-red-500 py-2 px-4 rounded mb-4  text-black font-bold text-xl transition-all ease-in-out duration-300'
-
-                      >
-                        <DeleteOutlined />
-                      </button>
-                    </Popconfirm>
-                    <button
-                      className='bg-indigo-800 hover:bg-indigo-700 text-white py-1.5 px-4 my-auto rounded-lg mb-4 transition-all ease-in-out duration-500'
-                      onClick={() => navigate(`${value.row_id}`)}
-                    >
-                      Edit
-                    </button>
-                  </td>
                 </tr>
               ))}
           </tbody>
@@ -124,4 +130,4 @@ function ReportTable() {
   );
 }
 
-export default ReportTable;
+export default ReportDataTable;

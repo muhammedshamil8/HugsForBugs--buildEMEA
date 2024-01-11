@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::get('/category', [UserController::class, 'usersWithCategory']);
+
 // Admin routes
 // prefix('admin')->
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     // Add more admin routes as needed
     Route::apiResource('/admin/users', UserController::class);
  
-
+    Route::get('/admin/category', [UserController::class, 'usersWithCategory']);
     Route::get('/admin/logged-user', [UserController::class, 'getAuthenticatedUser']);
     // Route::get('/admin/headers/{table_id}', [HeadersController::class, 'getByTableId']);
     Route::get('/admin/tables/{category_id}', [TablesController::class, 'getByCategoryId']);

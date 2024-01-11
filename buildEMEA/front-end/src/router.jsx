@@ -19,6 +19,8 @@ import UserForm from './view/admin-pages/User/UserForm';
 import Category from "./view/admin-pages/Category/Category";
 import Contact from "./view/user-pages/Contact/Contact";
 import ReportForm from "./view/user-pages/AddReport/New-Report";
+import ShowReport from "./view/admin-pages/Category/Report-data";
+import ReportDataTable from "./view/admin-pages/Category/Report-table";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
             {
                 path: '/category',
                 element: <Category />
+            },
+            {
+                path: '/category/:category_id/:category_name',
+                element: <ShowReport />
+            },
+            {
+                path: '/category/:category_id/:table_id/:table',
+                element: <ReportDataTable />
             }
 
         ]

@@ -208,9 +208,10 @@ function AdminLayout() {
       text-white 
       overflow-x-visible
       overflow-y-visible
+      scroll-smooth
       z-0">
 
-        <Outlet className="overflow-x-scroll"/>
+        <Outlet className="overflow-x-scroll scroll-smooth"/>
       </main>
       {notification &&
         <div className="notification">
@@ -263,11 +264,17 @@ function AdminLayout() {
             items-center
             text-white
           '>
-              <NavLink to='/admindashboard' className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
-              <NavLink to='/category' className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
+              <NavLink to='/admindashboard' 
+              onClick={onClose} className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+              <NavLink to='/category' 
+              onClick={onClose}  className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
 
-              <NavLink to='/users' className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
-              <NavLink to='/adminprofile' className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
+              <NavLink to='/users' 
+              onClick={onClose} 
+              className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
+              <NavLink to='/adminprofile' 
+              onClick={onClose} 
+              className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
               <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
             </ul>
           </nav>

@@ -40,7 +40,7 @@ const AdminLogin = () => {
       axiosClient.post('/admin/login', paylod)
       .then(({data}) => {
         setUser(data.admin);
-        console.log(data.message);
+        setMessage(data.message);
         // localStorage.setItem('role', data.admin.role);
         setRole(data.admin.role);
         setToken(data.token);
