@@ -43,3 +43,20 @@ User setup:-
 
 
 actually needed a best ui/ux and secured website..!
+
+
+
+
+
+
+``````
+user login
+                for demo : <br />
+                email : demo123@demo123 <br />
+                password : demo123@demo123
+
+
+admin login 
+                for demo : <br />
+                email : admin@example.com <br />
+                password : adminpassword

@@ -5,12 +5,14 @@ How to run Back-end
 - stack used : Laravel , MySql
 - Clone the repo
 - Get into the root directory [  cd buildEMEA/back-end  ]
-- make sure you have composer , mysql installed in your machine 
-  + Run `composer install` in the root directory to install all dependencies 
-  + Create a database named `buildEMEA` in your local machine
-  + Run `php artisan migrate` to migrate all tables to the database
-  + Run `php artisan db:seed` to seed the database with dummy data
-  + Run `php artisan serve` to start the server
-  + Go to `localhost:8000` to view the app
 
+## Installation 
+Make sure you have environment setup properly. You will need PHP8.1, composer and Node.js.
 
+1. Download the project (or clone using GIT)
+2. Copy `.env.example` into `.env` and configure database credentials
+3. Navigate to the project's root directory using terminal
+4. Run `composer install`
+5. Set the encryption key by executing `php artisan key:generate --ansi`
+6. Run migrations `php artisan migrate --seed`
+7. Start local server by executing `php artisan serve --port=9000`

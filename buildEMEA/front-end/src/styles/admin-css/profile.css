@@ -1,0 +1,64 @@
+.admin-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 10px;
+    background-color: rgba(158, 158, 158, 0.342);
+    backdrop-filter: blur(10px);
+  
+  }
+  
+  .admin-avatar {
+    height: 110px;
+    width: 110px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+  }
+  
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .info-box-admin {
+    width: 400px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #3C0429;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  label {
+    position: absolute;
+    top: -25px;
+  }
+  
+  .info-box {
+    background-color: #3C0429;
+    color: #fff;
+  }
+
+
+  .input-box{
+    background-color: #3C0429;
+    color: #fff;
+  }
+
+  .submit-button-box {
+    background: linear-gradient(to right, #3C0429, #F70564);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    align-items: center;
+  }
+  .submit-button-box:hover {
+    background: linear-gradient(to right, #F70564, #3C0429);
+    cursor: pointer;
+  }

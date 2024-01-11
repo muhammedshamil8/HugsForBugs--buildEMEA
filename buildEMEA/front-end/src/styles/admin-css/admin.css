@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.admin-body {
+  background-color: rgba(128, 128, 128, 0.171);
+  background-image: url('../../images/Admin-bg/admin-buildEMEA.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+nav a {
+  list-style-type: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+nav a:hover {
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+nav .active {
+  background-color: rgba(0, 0, 0, 0.233) !important;
+  color: rgb(209 213 219);
+
+}
+
+.icon {
+  font-size: 20px;
+  color: white;
+  width: 20px;
+  height: 20px;
+}
+
+.drawer-header {
+  background-color: rgba(202, 202, 202, 0.37);
+
+  position: relative;
+  z-index: 9;
+  padding: 0;
+  --tw-backdrop-blur: blur(12px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  max-width: 300px;
+
+}
+
+.drawer-body {
+  background-color: rgba(202, 202, 202, 0.37);
+  --tw-backdrop-blur: blur(12px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  padding: 0px !important;
+  max-width: 300px !important;
+
+}
+
+.drawer-wrapper {
+  background-color: rgba(255, 255, 255, 0) !important;
+  /* max-width: 200px !important; */
+  max-width: 300px !important;
+
+}
+.ant-drawer-wrapper-body{
+  padding: 0 !important;
+  background-color: rgba(255, 255, 255, 0) !important;
+
+  max-width: 300px !important;
+  
+}
+.ant-drawer-content{
+  background-color: rgba(255, 255, 255, 0) !important;
+
+  max-width: 300px !important;
+}
+.responsive-side-bar{
+  display: none !important;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .responsive-side-bar{
+    display: block !important;
+  }
+  .sidebar{
+    display: none !important;
+  }
+  .header{
+    margin: 0 !important;
+    justify-content: space-between !important;
+  }
+  .drawer-wrapper{
+    max-width: 100% !important;
+  }
+  .header-right{
+    margin-right: 0;
+   }
+   main{
+    margin-left: 0!important;
+   }
+  
+}
