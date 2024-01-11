@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 function ReportForm() {
+  const [messageState, setMessage] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
@@ -30,7 +31,6 @@ function ReportForm() {
   const [loading, setLoading] = useState(false);
   const [tabledataAll, setTabledataAll] = useState([]);
   const navigate = useNavigate();
-  const [message, setMessage] = useState('');
   useEffect(() => {
     setLoading(true);
 
@@ -157,7 +157,7 @@ function ReportForm() {
 
           {!loading && (
             <form onSubmit={handleSubmit}>
-              {message && <p className='text-red-500 p-2 text-center'>{message}</p>
+              {messageState  && <p className='text-red-500 p-2 text-center'>{messageState}</p>
               }
               {/* {headers.length === 0 && <p>No headers found.</p>} */}
               {headers.map(header => (

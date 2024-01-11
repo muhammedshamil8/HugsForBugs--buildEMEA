@@ -19,20 +19,25 @@ HugsForBugs
 5. Sibna Sherin [View Profile](https://github.com/Sibna-sherin)
 
 ## Link to Product Walkthrough
-[Link to video] comming soon!
+[Link to video](https://drive.google.com/file/d/15yBXCOsXwwt0rFG8uF2TDeTcxz7sueLb/view?usp=drive_link) !
 
 ## How it Works ?
-1. Explain the working of the project
-2. Embed a video of the project demo
+1. follow the steps in the buildEMEA folder README.md file
+2. follow the steps in the video
+3. [click here to watch video](https://drive.google.com/drive/folders/1-EpRUFsf5lSmezW7fVi9sxq2AygJLEuH?usp=drive_link)
+4. watch the video in the above link to know how to use the application
 
 ## Libraries Used
-Library Name - Version
+1. React
+2. Laravel
+3. Tailwind CSS
+4. MySQL
 
 ## How to Configure
 Instructions for setting up the project
 
 ## How to Run
-Instructions for running
+```cd buildEMEA``` && read the README.md file
 
 
 ## In Collaburation With 
