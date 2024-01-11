@@ -38,7 +38,15 @@ Instructions for setting up the project
 
 ## How to Run
 ```cd buildEMEA``` && read the README.md file
-
+## Future Coming Features
+- admin can create category
+- admin can create table
+- admin can delete table if needed then edit also
+- styled excel sheet export
+- admin can set deadline and turn of insert and edit option
+- admin can view progress bar to understand pending
+- data input validation 
+- ....etc 
 
 ## In Collaburation With 
 
