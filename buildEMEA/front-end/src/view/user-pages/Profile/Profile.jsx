@@ -22,7 +22,7 @@ function fetchUser() {
   axiosClient.get('/logged-user')
     .then(({ data }) => {
       setUser(data)
-      console.log(data);
+      // console.log(data);
     })
     .catch((error) => {
       if (error.response && error.response.status === 429) {
@@ -50,7 +50,7 @@ function fetchUser() {
         </div>
         <div className="info-box">
           <label>Category</label>
-          <p >{user.category_id && user.category || 'Not Have'}</p>
+          <p >{user.category_id && user.category.category || 'Not Have'}</p>
         </div >
         <div className="info-box">
           <label>Category Name</label>

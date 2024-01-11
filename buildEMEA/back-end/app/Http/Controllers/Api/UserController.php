@@ -81,9 +81,11 @@ class UserController extends Controller
     }
     public function getAuthenticatedUser()
     {
-        $user = Auth::user();
+        $user = Auth::user()->load('category');
 
-        return response()->json($user);
+        $userResource = new UserResource($user);
+    
+        return response()->json($userResource);
     }
     public function usersWithCategory()
     {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
-import { Col, Row, Skeleton, Button, Popconfirm } from 'antd';
+import { Col, Row, Skeleton, Button, Popconfirm ,Empty } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import avatar from '../../../images/avatar.png'
 import Department_image from '../../../images/department_image.png'
@@ -25,7 +25,7 @@ function Category() {
 
     axiosClient.get(`/admin/category`)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         setLoading(false);
         setCategories(data.data);
         setFilteredUsers(data.data);
@@ -98,7 +98,17 @@ return (
         />
       </div>
 
-
+{filteredUsers.length === 0 && (
+        <div className="flex items-center justify-center mb-6 ">
+          <p className="text-2xl font-bold text-gray-400"><Empty   description={
+      <span className="text-white">
+        No <a href="#API"> Data Found</a>
+      </span>
+    }>
+      </Empty>
+      </p>
+          </div>
+          )}
 
       {loading ? (
         <div>

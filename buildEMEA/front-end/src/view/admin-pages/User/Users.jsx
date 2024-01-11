@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
-import { Col, Row, Skeleton, Button, Popconfirm } from 'antd';
+import { Col, Row, Skeleton, Button, Popconfirm , Empty } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import avatar from '../../../images/avatar.png'
 
@@ -29,7 +29,7 @@ export default function Users() {
         fetchData();
       })
       .catch((error) => {
-        console.error("Error deleting user:", error);
+        // console.error("Error deleting user:", error);
       });
   };
 
@@ -38,7 +38,7 @@ export default function Users() {
 
     axiosClient.get(`/admin/users`)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         setLoading(false);
         setUsers(data.data);
         setFilteredUsers(data.data);
@@ -108,6 +108,17 @@ export default function Users() {
           />
         </div>
 
+        {filteredUsers.length === 0 && (
+          <div className="flex items-center justify-center mb-6 ">
+            <p className="text-2xl font-bold text-gray-400"><Empty description={
+              <span className="text-white">
+                No <a href="#API"> Data Found</a>
+              </span>
+            }>
+            </Empty>
+            </p>
+          </div>
+        )}
 
 
         {loading ? (
@@ -142,7 +153,7 @@ export default function Users() {
                         >
                           <button
                             className="btn-delete  text-white py-1 px-2 rounded absolute top-2 right-2 hover:text-red-600 transition-all ease-in-out duration-500"
-                            
+
                           >
                             <DeleteOutlined />
                           </button>

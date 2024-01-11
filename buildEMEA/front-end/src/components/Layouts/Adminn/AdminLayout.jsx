@@ -43,7 +43,7 @@ function AdminLayout() {
   const onLogout = ev => {
     ev.preventDefault()
 
-    axiosClient.post('/logout')
+    axiosClient.post('/admin/logout')
       .then(() => {
         setUser({})
         setToken(null)
@@ -62,7 +62,7 @@ function AdminLayout() {
     axiosClient.get('/logged-user')
       .then(({ data }) => {
         setUser(data)
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         if (error.response && error.response.status === 429) {

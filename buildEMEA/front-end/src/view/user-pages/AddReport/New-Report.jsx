@@ -1,40 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from "../../../axios-client.js";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function ReportForm() {
-  const { id, rowId } = useParams();
+  const { id, rowId, table } = useParams();
   const [headers, setHeaders] = useState([]);
   const [rowData, setRowData] = useState({});
   const [formData, setFormData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [tabledataAll, setTabledataAll] = useState([]);
+  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
   useEffect(() => {
     setLoading(true);
-  
+
+    fetchTablesData(id)
+    fetchHeaders(id, rowId);
     // Fetch headers
-    axiosClient.get(`/table-info/${id}`)
-      .then((res) => {
-        setHeaders(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  
-    // Fetch row data based on rowId
-    axiosClient.get(`/get-row-data/${id}/${rowId}}`)
-      .then((res) => {
-        setRowData(res.data);
-        // Initialize formData based on headers and row data
-        setFormData(res.data.values.map(value => ({ header_id: value.header_id, value: value.value })));
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
   }, [id, rowId]);
-  
+
+  function fetchHeaders(id, rowId) {
+    axiosClient.get(`/table-data/${id}`)
+      .then((res) => {
+        setHeaders(res.data.data);
+        // console.log(res.data.data);
+        // Initialize formData with an entry for every header
+        setFormData(res.data.data.map(header => ({ header_id: header.id, value: '' })));
+
+        // If rowId is present and not 'new', fetch row data
+        if (rowId && rowId !== 'new') {
+          axiosClient.get(`/table-data/${id}/${rowId}`)
+            .then((res) => {
+              setRowData(res.data);
+              // console.log(res.data);
+              setFormData(prevData =>
+                prevData.map(item => ({
+                  header_id: item.header_id,
+                  value: res.data.valuesByHeader[item.header_id]?.[0]?.value || ''
+                }))
+              );
+              setLoading(false);
+            })
+            .catch((err) => {
+              // console.log(err);
+              setLoading(false);
+            });
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        // console.log(err);
+        setLoading(false);
+      });
+  }
+
+  function fetchTablesData(id) {
+    axiosClient
+      .get(`/table-info/${id}`)
+      .then((res) => {
+        setTabledataAll(res.data);
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }
+
 
   const handleChange = (headerId, value) => {
     setFormData(prevData => prevData.map(item => (item.header_id === headerId ? { ...item, value } : item)));
@@ -45,68 +77,86 @@ function ReportForm() {
 
     // Check if all fields are filled
     if (formData.some(item => item.value.trim() === '')) {
-      console.log('Please fill in all fields.');
+      // console.log('Please fill in all fields.');
+      setMessage('Please fill in all fields.');
       return;
     }
 
-    // If in edit mode, update existing values
-    if (id && rowId) {
-      formData.forEach((item) => {
-        axiosClient.put(`/update-value/${item.header_id}/${rowId}`, { value: item.value })
-          .then((res) => {
-            console.log('Value updated successfully', res.data);
-          })
-          .catch((err) => {
-            console.error('Error updating value:', err);
-          });
+    // If rowId is present and not 'new', update existing values
+    if (rowId && rowId !== 'new') {
+      const updateRequests = formData.map(item => {
+        return axiosClient.put(`/update-values/${item.header_id}/${rowId}`, { value: item.value });
       });
-    } else {
-      // If in insert mode, insert new values
-      axiosClient.post('/insert-values', formData)
-        .then((res) => {
-          console.log('Values inserted successfully', res.data);
+
+      Promise.all(updateRequests)
+        .then((responses) => {
+          console.log('Values updated successfully', responses.map(res => res.data));
+          navigate(`/addreport/${id}/${table}`);
         })
         .catch((err) => {
-          console.error('Error inserting values:', err);
+          // console.error('Error updating values:', err);
+        });
+    } else {
+      // If rowId is not present or 'new', insert new values
+      axiosClient.post('/insert-values', { values: formData })
+        .then((res) => {
+          console.log('Values inserted successfully', res.data);
+          navigate(`/addreport/${id}/${table}`);
+        })
+        .catch((err) => {
+          // console.error('Error inserting values:', err);
         });
     }
   };
 
   return (
-    <div className='bg-rose-300 h-screen p-8'>
-      <h1>{id && rowId ? 'Edit' : 'New'} Report</h1>
+    <div className=' h-screen p-8'>
+      <div className='flex flex-col justify-between  '>
+        <div className='flex '>
+          <h1 className='font-bold text-xl mb-4'>{rowId && rowId !== 'new' ? 'Edit' : 'New'} Report</h1>
+        </div>
 
-      {loading && <p>Loading...</p>}
 
-      {!loading && (
-        <form onSubmit={handleSubmit}>
-          <table>
-            <thead>
-              <tr>
-                {headers.map(header => (
-                  <th key={header.id}>{header.header}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {headers.map(header => (
-                  <td key={header.id}>
-                    <input
-                      type="text"
-                      value={formData.find(item => item.header_id === header.id).value}
-                      onChange={(e) => handleChange(header.id, e.target.value)}
-                    />
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+        <div className='bg-white/10 p-8 rounded-md m-auto max-w-xl mb-4 font-bold text-lg'>
+          {tabledataAll.description}
+        </div>
 
-          <button type="submit">Save</button>
-        </form>
-      )}
+        {loading && <p>Loading...</p>}
+
+        <section className='max-w-xl  m-auto pt-10 bg-white/10 px-12 py-4 rounded-lg  min-w-72 mb-8'>
+
+
+          {!loading && (
+            <form onSubmit={handleSubmit}>
+              {message && <p className='text-red-500 p-2 text-center'>{message}</p>
+              }
+              {/* {headers.length === 0 && <p>No headers found.</p>} */}
+              {headers.map(header => (
+                <div key={header.id} className="mb-4">
+                  <label htmlFor={`header-${header.id}`} className='text-white'>{header.header}hyy</label>
+                  <p className='max-w-80 font-semibold'>{header.header} </p>
+                  {/* {formData.find(item => item.header_id === header.id)?.value} */}
+                  <textarea
+                    className='block w-full h-10 p-2 border text-black border-gray-300 rounded-md shadow-sm outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                    placeholder={'Enter value here'}
+                    id={`header-${header.id}`}
+                    value={formData.find(item => item.header_id === header.id)?.value || ''}
+                    onChange={(e) => handleChange(header.id, e.target.value)}
+                  />
+
+
+
+                </div>
+              ))}
+
+              <button className='bg-gradient-to-r from-indigo-600  to-blue-500 w-full p-2 rounded-lg hover:bg-gradient-to-l transition-all ease-in-out' type="submit">Save</button>
+            </form>
+          )}
+        </section>
+
+      </div>
     </div>
+
   );
 }
 

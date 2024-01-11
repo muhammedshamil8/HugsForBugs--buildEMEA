@@ -36,8 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tables/{category_id}', [TablesController::class, 'getByCategoryId']);
     Route::get('/table-info/{id}', [TablesController::class, 'Description']);
     Route::get('/table-data/{table_id}', [HeadersController::class, 'getHeadersWithValues']);
+    Route::delete('/table-data/{table_id}/{row_id}', [ValuesController::class, 'deleteRowAndValues']);
+    Route::get('/table-data/{table_id}/{row_id}', [ValuesController::class, 'getValuesByRowId']);
 
+    // Update values for a specific row
+    Route::put('/update-values/{header_id}/{row_id}', [ValuesController::class, 'updateValues']);
 
+    // Insert values for a specific row
+    Route::post('/insert-values', [ValuesController::class, 'insertValues']);
 });
 
 
@@ -48,7 +54,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::post('/admin/logout', [AuthController::class, 'adminLogout']);
     // Add more admin routes as needed
     Route::apiResource('/admin/users', UserController::class);
- 
+
     Route::get('/admin/category', [UserController::class, 'usersWithCategory']);
     Route::get('/admin/logged-user', [UserController::class, 'getAuthenticatedUser']);
     // Route::get('/admin/headers/{table_id}', [HeadersController::class, 'getByTableId']);

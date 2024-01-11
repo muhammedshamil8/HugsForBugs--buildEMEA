@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import axiosClient from "../../../axios-client.js";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined ,LeftOutlined  } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
 
 function ReportTable() {
@@ -16,10 +16,10 @@ function ReportTable() {
       .get(`/table-data/${id}`)
       .then((res) => {
         setTableCategory(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -30,7 +30,7 @@ function ReportTable() {
         setTabledataAll(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -38,23 +38,28 @@ function ReportTable() {
     fetchdata();
     fetchTablesData(id);
   }, [id]);
-
   const handleDelete = (rowId, id) => {
     axiosClient
-    // .delete(`/delete-row/${id}/${rowId}`)
-
-    console.log('Value deleted successfully');
-    console.log(rowId);
+      .delete(`/table-data/${id}/${rowId}`)
+      .then((response) => {
+        console.log('Value deleted successfully');
+        // console.log(rowId);
+        // If you need to refresh the table after deletion, you can refetch the data here
+        fetchdata();
+      })
+      .catch((error) => {
+        // console.error('Error deleting value', error);
+      });
   };
 
   return (
     <div className='h-screen p-8 overflow-visible min-w-fit'>
+      <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
+      <LeftOutlined />
+      </Link>
       <div>
         <h3 className='text-2xl font-bold'>Table : {table}</h3>
       </div>
-      <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
-        Back to Report List
-      </Link>
 
       <div className='p-6 overflow-x-auto'>
         <div className='bg-white/10 backdrop-blur-lg p-8 rounded-lg'>
@@ -88,7 +93,6 @@ function ReportTable() {
                   {tableCategory.map((item) => (
                     <td key={item.id} className='border text-left p-3'>
                       {item.values[index].value}<br />
-                      {item.values[index].row_id}
                     </td>
                   ))}
                   <td className='items-center justify-center   flex flex-row-reverse my-10 p-2'>
@@ -99,7 +103,7 @@ function ReportTable() {
                       okText="Yes"
                       cancelText="No"
                       okType="danger"
-                      onConfirm={() => handleDelete(`${value.row_id}`)}
+                      onConfirm={() => handleDelete(value.row_id, id)}
                     >
                       <button
                         className='hover:text-red-500 py-2 px-4 rounded mb-4  text-black font-bold text-xl transition-all ease-in-out duration-300'

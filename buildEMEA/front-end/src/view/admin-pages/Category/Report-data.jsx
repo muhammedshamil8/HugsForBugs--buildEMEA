@@ -20,24 +20,22 @@ function ShowReport() {
 
 
   function CardOpen(table, id) {
-    console.log(id);
-    console.log(table);
+    // console.log(id);
+    // console.log(table);
     navigate(`/category/${category_id}/${id}/${table}`);
   }
 
   function fetchTablesData(category_id) {
-    console.log(category_id);
+    // console.log(category_id);
     axiosClient
       .get(`/admin/tables/${category_id}`)
       .then((res) => {
-        console.log(res
-
-          );
+        // console.log(res);
           setTabledata(res.data);
 
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
 
       });
   }

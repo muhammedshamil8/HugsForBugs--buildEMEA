@@ -26,6 +26,14 @@ function Dashboard() {
 
           </div>
         </section>
+        <section className="w-full min-h-40 mt-10 p-2 m-auto">
+          <div className="w-full p-2 m-auto text-left text-lg">
+          <p className='max-w-xl m-auto'>
+              IQAC , where excellence meets confidentiality. IQAC is the guardian of academic quality, driven by a vision of continuous improvement. Committed to professionalism, we monitor and enhance academic processes, ensuring secure, confidential handling of sensitive information. Join us on the journey towards educational excellence, where every endeavor is measured against the yardstick of quality.
+            </p>
+          </div>
+</section>            
+
         <section className="w-full min-h-40 mt-10 p-2  grid grid-cols-2">
           <div className="w-full p-2 ">
             {/* free space */}

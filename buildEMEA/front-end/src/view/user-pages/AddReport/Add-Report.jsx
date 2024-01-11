@@ -18,8 +18,8 @@ function AddReport() {
 
 
   function CardOpen(table, id) {
-    console.log(id);
-    console.log(table);
+    // console.log(id);
+    // console.log(table);
     navigate(`/addreport/${id}/${table}`);
   }
 
@@ -27,9 +27,7 @@ function AddReport() {
     axiosClient
       .get(`/tables/${data.category_id}}`)
       .then((res) => {
-        console.log(res
-
-        );
+        // console.log(res);
         setTabledata(res.data);
 
       })
@@ -50,7 +48,7 @@ function AddReport() {
       .then(({ data }) => {
         setCurrentUser(data)
         fetchTablesData(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         if (error.response && error.response.status === 429) {
@@ -64,14 +62,14 @@ function AddReport() {
   return (
     <div className=' h-screen'>
       <div className='text-xl font-bold'>
-        <h1>{currentUser.category_name}Add-Report</h1>
+        <h1>{currentUser.category_name}</h1>
       </div>
 
 
       <Row gutter={[8, 8]} className='p-4 '>
         {tabledata.map((card) => (
           <Col key={card.id} className="gutter-row m-auto" span={6} xs={24} sm={12} md={12} lg={8} >
-            <div className=' p-8 max-w-96 rounded-lg bg-white/20 backdrop-blur-md m-1 flex flex-col justify-between max-h-72 min-h-44 cursor-pointer'>
+            <div className=' p-8 max-w-96 rounded-lg bg-white/20 backdrop-blur-md m-1 flex flex-col justify-between max-h-72 min-h-60 cursor-pointer'>
               <h1 className='text-md font-semibold'>{card.name}</h1>
               <p className='text-[17px] text-left'>{card.short_description}</p>
               <div className='flex justify-end'>

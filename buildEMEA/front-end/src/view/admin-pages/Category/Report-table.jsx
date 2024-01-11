@@ -16,10 +16,10 @@ function ReportDataTable() {
       .get(`/table-data/${table_id}`)
       .then((res) => {
         setTableCategory(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -30,7 +30,7 @@ function ReportDataTable() {
         setTabledataAll(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -39,13 +39,7 @@ function ReportDataTable() {
     fetchTablesData(table_id);
   }, [table_id]);
 
-  const handleDelete = (rowId, table_id) => {
-    axiosClient
-      .delete(`/delete-row/${table_id}/${rowId}`)
-
-    console.log('Value deleted successfully');
-    console.log(rowId);
-  };
+ 
 
 
   function ExportToExcel(table) {
