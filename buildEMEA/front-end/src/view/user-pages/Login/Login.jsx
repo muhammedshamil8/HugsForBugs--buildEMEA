@@ -23,9 +23,9 @@ const Login = () => {
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (placement) => {
     api.info({
-      message: `Notification ${placement}`,
+      message: `Are you Sure ?`,
       description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        'Please Contact Your Admin.! it is the  only  way for now ',
       placement,
     });
   };
@@ -63,7 +63,7 @@ const Login = () => {
       <div className='user-SignInPage--parent'>
         <div className='user-login-message'>
           <p>SIGN IN TO YOUR
-            <br /><span>ADMIN PANEL!</span></p>
+            <br /><span className="uppercase">Account!</span></p>
 
         </div>
 

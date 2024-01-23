@@ -48,7 +48,7 @@ function ShowReport() {
 
   return (
     <div className=' h-screen'>
-      <div> <Link to={`/category`}className='bg-rose-600 py-1 px-2 text-md rounded-full transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
+      <div> <Link to={`/category`}className='bg-rose-600 py-1 px-2 text-md rounded-full transform ease-in-out mb-4 inline-block hover:bg-rose-800 transition-all'>
       <LeftOutlined />
       </Link></div>
       <div className='text-xl font-bold'>

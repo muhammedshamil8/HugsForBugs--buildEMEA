@@ -1,9 +1,10 @@
 import { React, useEffect, useState } from 'react';
 import axiosClient from "../../../axios-client.js";
-import { useParams, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, useNavigate , Link} from 'react-router-dom';
 import { DeleteOutlined ,LeftOutlined  } from '@ant-design/icons';
 import { Popconfirm , message } from 'antd';
+import { motion } from "framer-motion";
+
 
 function ReportTable() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -64,6 +65,10 @@ function ReportTable() {
 
   return (
     <div className='h-screen p-8 overflow-visible min-w-fit'>
+       <motion.div 
+      initial={{ opacity: 0.2  }}
+      whileInView={{ opacity: 1 }}
+      >
        {contextHolder}
       <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
       <LeftOutlined />
@@ -135,6 +140,7 @@ function ReportTable() {
           </tbody>
         </table>
       </div>
+      </motion.div>
     </div>
   );
 }

@@ -2,7 +2,9 @@ import { React, useEffect, useState } from 'react';
 import { NavLink, Link, Outlet, useNavigate, Navigate } from 'react-router-dom';
 import { useStateContext } from "../../../context/ContextProvider";
 import axiosClient from "../../../axios-client.js";
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, Dropdown, Space, Menu } from 'antd';
+import { DownOutlined, SmileOutlined, LoginOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+
 // icons importing and images
 import AddReportIcon from '../../../assets/icons/addreport.svg';
 import ContactIcon from '../../../assets/icons/contact.svg';
@@ -14,7 +16,6 @@ import '../../../styles/general-css/general.css';
 import BGIMAGE from '../../../images/Admin-bg/admin-buildEMEA.png';
 import Logo from '../../../assets/Logo.svg';
 import Avatar from '../../../assets/avatar.svg';
-import { LoginOutlined } from '@ant-design/icons';
 
 function AdminLayout() {
   const { user, token, setUser, setToken, notification, role, setRole } = useStateContext();
@@ -56,6 +57,33 @@ function AdminLayout() {
   useEffect(() => {
     fetchUser();
   }, [])
+
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  // ... (other code)
+
+  const onDropdownVisibleChange = (open) => {
+    setDropdownVisible(open);
+  };
+
+  const menu = (
+    <Menu style={{ backgroundColor: '#FFFFFF' }}>
+
+        <div style={{ width: 250 }} className='p-4'>
+          <div className="flex flex-col justify-center items-center pb-6">
+            <img src={Avatar} alt='avatar' />
+            <h5 className="font-medium text-xl mt-2">{user.name}</h5>
+          </div>
+          <Button onClick={() => navigate('/adminprofile')} size="large" className="w-full">
+            Profile
+          </Button>
+          <Button size="large" danger className="w-full mt-2" onClick={onLogout}>
+            Log Out
+          </Button>
+        </div>
+    </Menu>
+  );
 
   function fetchUser() {
 
@@ -127,12 +155,23 @@ function AdminLayout() {
           <div className='flex items-center  p-10 h-full xl:mr-44 mr-2'>
             {/* username */}
             <div>
-              <p className='mr-4 text-white'>{user.name}</p>
+              {/* <p className='mr-4 text-white'>{user.name}</p> */}
             </div>
 
             {/* Avatar */}
             <div className='bg-white rounded-2xl w-10 overflow-hidden'>
-              <img src={Avatar} alt='avatar' />
+              <Dropdown
+                overlay={menu}
+                open={dropdownVisible}
+                onOpenChange={onDropdownVisibleChange}
+              >
+                <div
+                  className='bg-white rounded-2xl w-10 overflow-hidden cursor-pointer'
+                  onClick={() => setDropdownVisible(!dropdownVisible)}
+                >
+                  <img src={Avatar} alt='avatar' />
+                </div>
+              </Dropdown>
             </div>
           </div>
         </div>
@@ -188,9 +227,9 @@ function AdminLayout() {
             <NavLink to='/admindashboard' className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
             <NavLink to='/category' className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
 
-            <NavLink to='/users' className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
+            <NavLink to='/users' className='hover:text-gray-300' ><UsergroupAddOutlined className='icon' />Users</NavLink>
             <NavLink to='/adminprofile' className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
-            <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
+            {/* <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button> */}
           </ul>
         </nav>
 
@@ -206,12 +245,10 @@ function AdminLayout() {
         ml-44
         mt-20
       text-white 
-      overflow-x-visible
-      overflow-y-visible
       scroll-smooth
       z-0">
 
-        <Outlet className="overflow-x-scroll scroll-smooth"/>
+        <Outlet className="" />
       </main>
       {notification &&
         <div className="notification">
@@ -264,17 +301,17 @@ function AdminLayout() {
             items-center
             text-white
           '>
-              <NavLink to='/admindashboard' 
-              onClick={onClose} className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
-              <NavLink to='/category' 
-              onClick={onClose}  className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
+              <NavLink to='/admindashboard'
+                onClick={onClose} className='hover:text-gray-300' ><img src={HomeIcon} className='icon' />Dashboard</NavLink>
+              <NavLink to='/category'
+                onClick={onClose} className='hover:text-gray-300' ><img src={AddReportIcon} className='icon' />Category</NavLink>
 
-              <NavLink to='/users' 
-              onClick={onClose} 
-              className='hover:text-gray-300' ><img src={ContactIcon} className='icon' />Users</NavLink>
-              <NavLink to='/adminprofile' 
-              onClick={onClose} 
-              className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
+              <NavLink to='/users'
+                onClick={onClose}
+                className='hover:text-gray-300' ><UsergroupAddOutlined className='icon' />Users</NavLink>
+              <NavLink to='/adminprofile'
+                onClick={onClose}
+                className='hover:text-gray-300' ><img src={ProfileIcon} className='icon' />Profile</NavLink>
               <button onClick={onLogout} className='hover:text-gray-300 flex justify-start p-2  gap-4 items-center w-full'><LoginOutlined />Log out</button>
             </ul>
           </nav>

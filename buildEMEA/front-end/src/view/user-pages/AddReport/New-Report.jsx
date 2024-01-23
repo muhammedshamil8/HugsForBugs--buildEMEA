@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from "../../../axios-client.js";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate ,Link} from 'react-router-dom';
 import { message } from 'antd';
+import { DeleteOutlined ,DoubleLeftOutlined  } from '@ant-design/icons';
+import { motion } from "framer-motion";
+
+
 
 function ReportForm() {
   const [messageState, setMessage] = useState('');
@@ -139,7 +143,14 @@ function ReportForm() {
 
   return (
     <div className=' h-screen p-8'>
+          <motion.div 
+      initial={{ opacity: 0.2  }}
+      whileInView={{ opacity: 1 }}
+      >
       {contextHolder}
+      <Link to="/addreport" className='bg-indigo-800 py-2 px-4 rounded-lg transform ease-in-out mb-4 inline-block hover:bg-indigo-700 '>
+      <DoubleLeftOutlined />
+      </Link>
       <div className='flex flex-col justify-between  '>
         <div className='flex '>
           <h1 className='font-bold text-xl mb-4'>{rowId && rowId !== 'new' ? 'Edit' : 'New'} Report</h1>
@@ -184,6 +195,7 @@ function ReportForm() {
         </section>
 
       </div>
+      </motion.div>
     </div>
 
   );

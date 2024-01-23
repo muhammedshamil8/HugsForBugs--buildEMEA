@@ -112,7 +112,7 @@ export default function Users() {
       </div>
       <div className="card mt-4 animated fadeInDown">
         <div className="flex items-center justify-center mb-6 ">
-          <input type="search" placeholder="Search Users" className="w-96 border border-gray-400 p-2 rounded-full text-black bg-white/85 hover:bg-white/95 outline-none hover:border hover:border-lime-800 active:bg-white/95"
+          <input type="search" placeholder="Search Users" className="w-96 border border-gray-400 p-2 rounded-full text-black bg-white/85 hover:bg-white/95 outline-none hover:border hover:border-lime-800 active:bg-white/95 focus:ring-2 focus:ring-lime-600"
             onChange={handleSearch}
           />
         </div>
@@ -140,14 +140,14 @@ export default function Users() {
             {
               filteredUsers.map((u) => (
                 <Col className="gutter-row  gap-4 m-auto" span={6} xs={24} sm={12} md={12} lg={8} key={u.id}>
-                  <div className="max-h-72 flex bg-white/20 backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto ">
+                  <div className="max-h-72 flex bg-white/20 backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto">
                     <div className="bg-white rounded-xl ">
                       <img src={avatar} alt="avatar" className="w-16 h-16 rounded-full" />
                     </div>
-                    <div className="my-auto">
-                      <p className=" font-bold text-md">{u.name}</p>
-                      <p className=" font-bold text-md">{u.email}</p>
-                      <p className=" font-bold text-md">{u.category_name}</p>
+                    <div className="my-auto text-wrap">
+                      <p className=" font-bold text-md ">{u.name}</p>
+                      <p className=" font-bold text-md ">{u.email}</p>
+                      <p className=" font-bold text-md ">{u.category_name}</p>
                       <p className=" ">
                         <Link className="btn-edit  text-white py-1 px-2 rounded absolute top-2 right-10 hover:text-green-400" to={`/users/${u.id}`}>
                           <EditOutlined />
