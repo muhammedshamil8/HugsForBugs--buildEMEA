@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
-import { Col, Row, Skeleton, Button, Popconfirm ,Empty } from 'antd';
+import { Col, Row, Skeleton, Button, Popconfirm, Empty } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import avatar from '../../../images/avatar.png'
 import Department_image from '../../../images/department_image.png'
@@ -60,27 +60,29 @@ function Category() {
       case 2:
         return Clubs_image;
       case 3:
-        return  NSS_NCC_image;
+        return NSS_NCC_image;
       case 4:
         return Library_image;
       default:
         return "../../../images/avatar.png";
     }
   };
-  
-  
 
-return (
-  <div className=" h-screen p-4 overflow-visible ">
-    <div className="flex  flex-col  mb-4">
-      <div>
+  function category(label) {
+    return label.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
 
-        <h1 className="text-4xl font-bold -ml-4 -mb-2 mt-2">Category</h1>
+  return (
+    <div className=" h-screen p-4 overflow-visible ">
+      <div className="flex  flex-col  mb-4">
+        <div>
+
+          <h1 className="text-4xl font-bold -ml-4 -mb-2 mt-2">Category</h1>
+        </div>
+
       </div>
-
-    </div>
-    <div className="flex justify-end gap-4">
-      {/* <button
+      <div className="flex justify-end gap-4">
+        {/* <button
         className={`px-2 py-1  text-white rounded-md ${currentPage === 1 ? 'bg-gray-400' : 'bg-gray-700'} `}
         onClick={fetchPrevPage}
         disabled={currentPage <= 1}
@@ -90,70 +92,74 @@ return (
       <button className={`px-2 py-1  text-white rounded-md ${currentPage === 3 ? 'bg-gray-400' : 'bg-gray-700'} `} onClick={fetchNextPage} disabled={currentPage >= 3}>
         N
       </button> */}
-    </div>
-    <div className="card mt-4 animated fadeInDown">
-      <div className="flex items-center justify-center mb-6 ">
-        <input type="search" placeholder="Search Users" className="w-96 border border-gray-400 p-2 rounded-full text-black bg-white/85 hover:bg-white/95 outline-none hover:border hover:border-lime-800 active:bg-white/95"
-          onChange={handleSearch}
-        />
+      </div>
+      <div className="card mt-4 animated fadeInDown">
+        <div className="flex items-center justify-center mb-6 ">
+          <input
+            type="search"
+            placeholder="Search Users"
+            className="w-96 border border-gray-400 p-2 rounded-full text-black bg-white/85 hover:bg-white/95 outline-none focus:border-lime-800 focus:ring-2 focus:ring-lime-600 transition-all duration-300"
+            onChange={handleSearch}
+          />
+
+        </div>
+
+        {filteredUsers.length === 0 && (
+          <div className="flex items-center justify-center mb-6 ">
+            <p className="text-2xl font-bold text-gray-400"><Empty description={
+              <span className="text-white">
+                No <a href="#API"> Data Found</a>
+              </span>
+            }>
+            </Empty>
+            </p>
+          </div>
+        )}
+
+        {loading ? (
+          <div>
+
+            <Skeleton active />
+          </div>
+        ) : (
+          <Row gutter={[16, 35]} className="m-auto ">
+            {
+              filteredUsers.map((u) => (
+                <Col className="gutter-row  gap-4 m-auto" span={6} xs={24} sm={12} md={12} lg={8} key={u.id}>
+                  <div className=" flex backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto mb-2 min-h-48 max-h-48 items-center justify-center bg-white/10">
+                    {/* bg image */}
+                    <div className="top-0 rounded-xl absolute  left-0 right-0 bottom-0 ">
+                      <img src={image(u.category_id)} alt="bg" className="w-full h-full z-0 opacity-50" />
+                    </div>
+
+                    <div className="my-auto z-10 flex flex-col items-center justify-center ">
+
+                      <p className=" font-bold text-lg capitalize select-none">{category(u.category.category)}</p>
+                      {/* <p className=" font-bold text-md">{u.email}</p> */}
+                      <p className=" font-bold text-xl capitalize select-none">{u.category_name}</p>
+                      <p className="absolute bottom-2 left-2 font-semibold text-gray-400 text-xs capitalize select-none">{u.name}</p>
+                      <p className="absolute bottom-4 right-4 ">
+                        <Link className="bg-rose-600 py-0 px-2 rounded-xl  hover:bg-rose-700 
+                        transition-all ease-in-out
+                        text-center flex items-center justify-center hover:text-white font-semibold select-none" to={`${u.category_id}/${u.category_name}`}>
+                          Open
+                        </Link>
+
+                      </p>
+                    </div>
+
+                  </div>
+
+                </Col>
+              ))
+            }
+          </Row>
+        )}
+
       </div>
 
-{filteredUsers.length === 0 && (
-        <div className="flex items-center justify-center mb-6 ">
-          <p className="text-2xl font-bold text-gray-400"><Empty   description={
-      <span className="text-white">
-        No <a href="#API"> Data Found</a>
-      </span>
-    }>
-      </Empty>
-      </p>
-          </div>
-          )}
-
-      {loading ? (
-        <div>
-
-          <Skeleton active />
-        </div>
-      ) : (
-        <Row gutter={[16, 35]} className="m-auto ">
-          {
-            filteredUsers.map((u) => (
-              <Col className="gutter-row  gap-4 m-auto" span={6} xs={24} sm={12} md={12} lg={8} key={u.id}>
-                <div className=" flex backdrop-blur-lg relative max-w-96 p-4 gap-2 py-8 px-6 rounded-md m-auto mb-2 min-h-48 max-h-48 items-center justify-center bg-white/10">
-                  {/* bg image */}
-                  <div className="top-0 rounded-xl absolute  left-0 right-0 bottom-0 ">
-                    <img src={image(u.category_id)} alt="bg" className="w-full h-full z-0 opacity-50" />
-                  </div>
-
-                  <div className="my-auto z-10 flex flex-col items-center justify-center ">
-
-                    <p className=" font-bold text-lg capitalize">{u.category.category}</p>
-                    {/* <p className=" font-bold text-md">{u.email}</p> */}
-                    <p className=" font-bold text-xl capitalize">{u.category_name}</p>
-                    <p className="absolute bottom-2 left-2 font-semibold text-gray-400 text-xs capitalize">{u.name}</p>
-                    <p className="absolute bottom-4 right-4 ">
-                      <Link className="bg-rose-600 py-0 px-2 rounded-xl  hover:bg-rose-700 
-                        transition-all ease-in-out
-                        text-center flex items-center justify-center hover:text-white font-semibold" to={`${u.category_id}/${u.category_name}`}>
-                        Open
-                      </Link>
-
-                    </p>
-                  </div>
-
-                </div>
-
-              </Col>
-            ))
-          }
-        </Row>
-      )}
-
     </div>
-
-  </div>
-);
+  );
 }
 
 export default Category;

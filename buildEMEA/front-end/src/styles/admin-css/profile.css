@@ -47,7 +47,7 @@
 
   .input-box{
     background-color: #3C0429;
-    color: #fff;
+    color: #fff !important;
   }
 
   .submit-button-box {
@@ -61,4 +61,24 @@
   .submit-button-box:hover {
     background: linear-gradient(to right, #F70564, #3C0429);
     cursor: pointer;
+  }
+  .ant-select-selection-placeholder {
+    color: #a1a1a1 !important;
+  }
+  .dropdown-style{
+    background-color: #72004b;
+    color: #fff !important;
+  }
+  .ant-select-selector{
+    background-color: #3C0429 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding-left: 0px !important;
+  }
+  .ant-select-arrow{
+    color: #fff !important;
+  }
+  .ant-select-selection-search{
+    top: -8px !important;
   }

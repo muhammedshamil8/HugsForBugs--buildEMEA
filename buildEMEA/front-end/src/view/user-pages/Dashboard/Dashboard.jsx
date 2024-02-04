@@ -2,10 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../../styles/User-css/dashboard.css';
 import ImageDashboard from '../../../images/iqacdashboard.jpg';
+import { motion } from "framer-motion";
 
 function Dashboard() {
   return (
     <div className=' h-full flex flex-col gap-24'>
+         <motion.div 
+      initial={{ opacity: 0.2  }}
+      whileInView={{ opacity: 1 }}
+      >
       <div className="w-full p-8 text-center">
         <h1 className="text-4xl font-bold mb-4">IQAC</h1>
         <p className="text-xl">
@@ -50,7 +55,8 @@ function Dashboard() {
         </section>
       </main>
 
-    </div>
+      </motion.div>
+       </div>
   )
 }
 

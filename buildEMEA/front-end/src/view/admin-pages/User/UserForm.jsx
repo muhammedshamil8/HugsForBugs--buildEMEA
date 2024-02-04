@@ -1,13 +1,16 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , Link} from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosClient from "../../../axios-client.js";
 import { useStateContext } from "../../../context/ContextProvider.jsx";
 import avatar from '../../../images/avatar.png'
 import '../../../styles/admin-css/profile.css'
-import { message } from 'antd';
+import { message, Select } from 'antd';
+import {  LeftOutlined } from '@ant-design/icons';
+
 
 
 export default function UserForm() {
+  const [categories, setCategories] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
@@ -49,6 +52,41 @@ export default function UserForm() {
     }, []);
   }
 
+  useEffect(() => {
+    axiosClient
+      .get("/admin/categories")
+      .then((res) => {
+        setCategories(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }, []);
+
+  //  function to format the category label
+  const formatCategoryLabel = (label) => {
+    // Replace underscores with spaces and capitalize each word
+    return label.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  };
+
+  const categoriesList = categories.map(category => ({
+    label: formatCategoryLabel(category.category),
+    value: category.id,
+  }));
+
+  const onChange = (value) => {
+    // console.log(`selected ${value}`);
+    setUser({ ...user, category_id: value })
+  };
+
+  const onSearch = (value) => {
+    // console.log('search:', value);
+  };
+
+  const filterOption = (input, option) =>
+    option.label.toLowerCase().includes(input.toLowerCase());
+
   const onSubmit = (ev) => {
     ev.preventDefault();
     if (user.id) {
@@ -89,6 +127,9 @@ export default function UserForm() {
 
   return (
     <div className=" h-screen p-4 overflow-visible">
+       <div> <Link to={`/users`}className='bg-rose-600 py-1 px-2 text-md rounded-full transform ease-in-out mb-4 inline-block hover:bg-rose-800 transition-all duration-200'>
+      <LeftOutlined />
+      </Link></div>
       {contextHolder}
       {user.id && <h1 className="text-2xl font-bold text-center mb-4 ">Update User: {user.name}</h1>}
       {!user.id && <h1 className="text-2xl font-bold mb-4 text-center">New User</h1>}
@@ -120,14 +161,21 @@ export default function UserForm() {
                 placeholder="Email"
               />
               <input value={user.category_name} onChange={(ev) => setUser({ ...user, category_name: ev.target.value })} className="input input-box p-2 rounded-md py-3" placeholder="Category Name" />
-              <select value={user.category_id} onChange={(ev) => setUser({ ...user, category_id: ev.target.value })} className="input input-box p-2 rounded-md py-3 cursor-pointer">
-                <option value="" className=" p-4">Select Category</option>
-                <option value="1" className="">Single Department</option>
-                <option value="2">Clubs</option>
-                <option value="3">NSS & NCC</option>
-                <option value="4">Library</option>
+              
+              <Select
+                value={user.category_id}
+                showSearch
+                placeholder="Select a category"
+                optionFilterProp="children"
+                onChange={onChange}
+                onSearch={onSearch}
+                filterOption={filterOption}
+                options={categoriesList}
+                className="input input-box p-2 rounded-md py-3 cursor-pointer text-white"
+                popupClassName="dropdown-style"
+                size="large"
+              />
 
-              </select>
               <input
                 type="password"
                 onChange={(ev) => setUser({ ...user, password: ev.target.value })}

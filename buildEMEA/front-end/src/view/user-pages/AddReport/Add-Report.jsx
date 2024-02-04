@@ -2,6 +2,8 @@ import { React, useEffect, useState } from 'react';
 import axiosClient from "../../../axios-client.js";
 import { Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
+
 
 
 
@@ -61,10 +63,14 @@ function AddReport() {
 
   return (
     <div className=' h-screen'>
-      <div className='text-xl font-bold'>
+         
+      {/* <div className='text-xl font-bold'>
         <h1>{currentUser.category_name}</h1>
-      </div>
-
+      </div> */}
+      <motion.div 
+      initial={{ scale: 0  }}
+      whileInView={{ scale: 1 , transition: {duration: 1 } }}
+      >
 
       <Row gutter={[8, 8]} className='p-4 '>
         {tabledata.map((card) => (
@@ -80,6 +86,7 @@ function AddReport() {
           </Col>
         ))}
       </Row>
+      </motion.div>
     </div>
   );
 }

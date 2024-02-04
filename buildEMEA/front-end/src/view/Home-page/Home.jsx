@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import HomeImg from '../../assets/home-bg.svg';
 import Logo from '../../assets/Logo.svg';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+
 
 function Home() {
   const [showOverlay, setShowOverlay] = useState(false);

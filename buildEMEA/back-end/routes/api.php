@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\HeadersController;
 use App\Http\Controllers\Api\TablesController;
 use App\Http\Controllers\Api\ValuesController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,17 +50,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Admin routes
 // prefix('admin')->
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
     // Your admin-only routes go here
-    Route::post('/admin/logout', [AuthController::class, 'adminLogout']);
+    Route::post('/logout', [AuthController::class, 'adminLogout']);
     // Add more admin routes as needed
-    Route::apiResource('/admin/users', UserController::class);
+    Route::apiResource('/users', UserController::class);
 
-    Route::get('/admin/category', [UserController::class, 'usersWithCategory']);
-    Route::get('/admin/logged-user', [UserController::class, 'getAuthenticatedUser']);
+    Route::get('/category', [UserController::class, 'usersWithCategory']);
+    Route::get('/logged-user', [UserController::class, 'getAuthenticatedUser']);
     // Route::get('/admin/headers/{table_id}', [HeadersController::class, 'getByTableId']);
-    Route::get('/admin/tables/{category_id}', [TablesController::class, 'getByCategoryId']);
-    Route::get('/admin/table-info/{id}', [TablesController::class, 'Description']);
-    Route::get('/admin/table-data/{table_id}', [HeadersController::class, 'getHeadersWithValues']);
+    Route::get('/tables/{category_id}', [TablesController::class, 'getByCategoryId']);
+    Route::get('/table-info/{id}', [TablesController::class, 'Description']);
+    Route::get('/table-data/{table_id}', [HeadersController::class, 'getHeadersWithValues']);
+    Route::get('/categories', [CategoryController::class, 'index']);
 
 });
