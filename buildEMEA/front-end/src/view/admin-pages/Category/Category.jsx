@@ -134,14 +134,14 @@ function Category() {
 
                     <div className="my-auto z-10 flex flex-col items-center justify-center ">
 
-                      <p className=" font-bold text-lg capitalize">{category(u.category.category)}</p>
+                      <p className=" font-bold text-lg capitalize select-none">{category(u.category.category)}</p>
                       {/* <p className=" font-bold text-md">{u.email}</p> */}
-                      <p className=" font-bold text-xl capitalize">{u.category_name}</p>
-                      <p className="absolute bottom-2 left-2 font-semibold text-gray-400 text-xs capitalize">{u.name}</p>
+                      <p className=" font-bold text-xl capitalize select-none">{u.category_name}</p>
+                      <p className="absolute bottom-2 left-2 font-semibold text-gray-400 text-xs capitalize select-none">{u.name}</p>
                       <p className="absolute bottom-4 right-4 ">
                         <Link className="bg-rose-600 py-0 px-2 rounded-xl  hover:bg-rose-700 
                         transition-all ease-in-out
-                        text-center flex items-center justify-center hover:text-white font-semibold" to={`${u.category_id}/${u.category_name}`}>
+                        text-center flex items-center justify-center hover:text-white font-semibold select-none" to={`${u.category_id}/${u.category_name}`}>
                           Open
                         </Link>
 

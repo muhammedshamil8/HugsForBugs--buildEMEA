@@ -4,7 +4,7 @@ Project -- IQAC
 
 Stack : 
      {
-     front-end : react 
+     front-end : react,tailwind
      back-end  : laravel 
      database  : mysql 
      }
@@ -12,42 +12,6 @@ Repo :
      [
      https://github.com/muhammedshamil8/HugsForBugs--buildEMEA 
      ]
-
-Things to do :-
- + Admin setup 
- + User setup 
-______
-
-Admin setup:-
-
-- login page 
-- Dashboard page / 
-            - create user ( username , passowrd , category(eg:- department , club etc)  ) things to be better ;-(edit , delete etc)
-            - list the users 
-            - when click users show the datas users uploaded
-            - sort or filter by users more uploaded 
-            - track or know by any info users progress ...
-            - admin profile page if needed
-            - admin need to dowload/export  it on exl format 
-            - reset user passord if need 
-
-
-User setup:-
-
-- login page
-- the questions card means forms... they need need to fill and upload 
-- they need to visible what all they uploaded (things to do better :- edit , delete etc )
-- profile page if needed 
-- forgot passowrd redorect to admin a mail
-
-
-
-actually needed a best ui/ux and secured website..!
-
-
-
-
-
 
 ``````
 user login
