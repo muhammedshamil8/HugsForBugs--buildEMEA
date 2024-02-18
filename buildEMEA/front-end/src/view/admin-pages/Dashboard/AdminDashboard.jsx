@@ -38,7 +38,7 @@ function AdminDashboard() {
         </div>
         <div className="w-full p-4 text-right">
           <h1 className="text-4xl font-bold mb-4">
-            Haulath K
+          Quadinator Name
 
           </h1>
           <p className="text-md">
